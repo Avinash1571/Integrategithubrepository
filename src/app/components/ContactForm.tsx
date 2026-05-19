@@ -26,11 +26,13 @@ const EMPTY_FORM: FormData = {
   consent: false,
 };
 
-export function ContactFormModal({ onClose }: { onClose: () => void }) {
+export function ContactFormModal({ open, onOpenChange }: { open: boolean; onOpenChange: (open: boolean) => void }) {
   const [formData, setFormData] = useState<FormData>(EMPTY_FORM);
   const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState<Partial<Record<keyof FormData, string>>>({});
   const [popup, setPopup] = useState({ show: false, message: "", success: true });
+
+  if (!open) return null;
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
@@ -421,108 +423,159 @@ export function ContactFormModal({ onClose }: { onClose: () => void }) {
             flex-direction: column;
             width: 100%;
             max-width: 100%;
-            height: 96vh;
-            max-height: 96vh;
+            height: 100vh;
+            max-height: 100vh;
             min-height: unset;
             border-radius: 16px 16px 0 0;
             box-shadow: 0 -6px 32px rgba(0,0,0,0.25);
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
           }
 
           .rfm-left {
             width: 100%;
             flex-shrink: 0;
-            padding: 18px 18px 14px;
+            padding: 16px 16px 12px;
             justify-content: flex-start;
             gap: 0;
+            max-height: 28vh;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: thin;
           }
 
           .rfm-left h2 {
-            font-size: 1.1rem;
-            margin: 0 0 6px;
+            font-size: 1.15rem;
+            margin: 0 0 8px;
+            line-height: 1.3;
           }
 
           .rfm-left-sub {
-            font-size: 0.78rem;
-            margin: 0 0 10px;
+            font-size: 0.8rem;
+            margin: 0 0 12px;
+            line-height: 1.5;
           }
 
           .rfm-steps {
-            flex-direction: row;
-            gap: 8px;
-            overflow-x: auto;
-            scrollbar-width: none;
-            -ms-overflow-style: none;
-            padding-bottom: 2px;
+            flex-direction: column;
+            gap: 10px;
+            padding-bottom: 4px;
           }
-          .rfm-steps::-webkit-scrollbar { display: none; }
 
           .rfm-step {
-            flex-direction: column;
-            gap: 4px;
+            flex-direction: row;
+            gap: 10px;
             flex: 0 0 auto;
-            min-width: 110px;
+            min-width: auto;
             background: rgba(255,255,255,0.12);
             border-radius: 8px;
-            padding: 8px;
+            padding: 10px;
+            align-items: center;
           }
 
           .rfm-step-num {
-            width: 22px;
-            height: 22px;
-            font-size: 0.7rem;
+            width: 24px;
+            height: 24px;
+            font-size: 0.75rem;
           }
 
-          .rfm-step-title { font-size: 0.72rem; }
-          .rfm-step-desc  { font-size: 0.68rem; }
+          .rfm-step-title {
+            font-size: 0.75rem;
+            margin-bottom: 2px;
+          }
+          .rfm-step-desc {
+            font-size: 0.7rem;
+            line-height: 1.4;
+          }
 
           .rfm-left-footer { display: none; }
 
           .rfm-right {
             flex: 1;
             min-height: 0;
+            max-height: 72vh;
+            display: flex;
+            flex-direction: column;
           }
 
           .rfm-right-header {
-            padding: 14px 18px 10px;
+            padding: 16px 18px 12px;
+            flex-shrink: 0;
           }
 
-          .rfm-right-header h3 { font-size: 1rem; }
-          .rfm-right-header p  { font-size: 0.8rem; }
+          .rfm-right-header h3 { font-size: 1.05rem; margin-bottom: 4px; }
+          .rfm-right-header p  { font-size: 0.82rem; }
 
           .rfm-close {
-            top: 10px;
-            right: 12px;
-            width: 28px;
-            height: 28px;
-            font-size: 0.9rem;
+            top: 12px;
+            right: 14px;
+            width: 30px;
+            height: 30px;
+            font-size: 0.95rem;
           }
 
           .rfm-body {
-            padding: 14px 18px 6px;
+            flex: 1;
+            padding: 12px 18px 8px;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
           }
 
           /* Single column on mobile */
           .rfm-row {
             grid-template-columns: 1fr;
             gap: 0;
+            margin-bottom: 4px;
+          }
+
+          .rfm-row-gap {
+            margin-bottom: 4px;
+          }
+
+          .rfm-field {
+            margin-bottom: 0;
           }
 
           /* font-size 16px stops iOS Safari from zooming on input focus */
           .rfm-input {
             font-size: 16px;
-            padding: 11px 12px;
+            padding: 12px 14px;
             border-radius: 8px;
           }
 
-          textarea.rfm-input { height: 80px; }
+          textarea.rfm-input {
+            height: 90px;
+            font-size: 16px;
+          }
 
           .rfm-footer {
-            padding: 10px 18px 18px;
+            padding: 12px 18px;
+            flex-shrink: 0;
+            padding-bottom: max(18px, env(safe-area-inset-bottom));
           }
 
           .rfm-submit {
-            font-size: 0.9rem;
-            padding: 11px 20px;
+            font-size: 0.95rem;
+            padding: 13px 24px;
+            font-weight: 700;
+          }
+
+          .rfm-consent label {
+            font-size: 0.8rem;
+            line-height: 1.5;
+          }
+
+          .rfm-err {
+            font-size: 0.75rem;
+            min-height: 18px;
+            margin-top: 4px;
+          }
+
+          .rfm-consent input[type="checkbox"] {
+            width: 16px;
+            height: 16px;
           }
         }
 
@@ -555,7 +608,7 @@ export function ContactFormModal({ onClose }: { onClose: () => void }) {
           {/* LEFT */}
           <div className="rfm-left">
             <div>
-              <h2>Get in touch with RAMS360</h2>
+              <h2>Get in touch with Endyra RAMS360</h2>
               <p className="rfm-left-sub">
                 Share your use case and interest. We will review your request and get back to you with next steps.
               </p>
@@ -588,7 +641,7 @@ export function ContactFormModal({ onClose }: { onClose: () => void }) {
               <p>Fill in the details below. Required fields are kept minimal.</p>
             </div>
 
-            <button className="rfm-close" onClick={onClose} aria-label="Close">✕</button>
+            <button className="rfm-close" onClick={() => onOpenChange(false)} aria-label="Close">✕</button>
 
             <div className="rfm-body">
 
@@ -725,7 +778,7 @@ export function ContactFormModal({ onClose }: { onClose: () => void }) {
               className="rfm-popup-btn"
               onClick={() => {
                 setPopup((p) => ({ ...p, show: false }));
-                if (popup.success) onClose();
+                if (popup.success) onOpenChange(false);
               }}
             >
               OK

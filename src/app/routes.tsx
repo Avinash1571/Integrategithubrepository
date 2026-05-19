@@ -8,6 +8,7 @@ import { PMLandingPage } from './pages/PMLandingPage';
 import { SparesLandingPage } from './pages/SparesLandingPage';
 import { SafetyLandingPage } from './pages/SafetyLandingPage';
 import { FTALandingPage } from './pages/FTALandingPage';
+import { RBDLandingPage } from './pages/RBDLandingPage';
 import { Demo } from './pages/Demo';
 import { ScrollToHash } from './components/ScrollToHash';
 
@@ -64,6 +65,10 @@ export const router = createBrowserRouter([
       {
         path: 'modules/fta',
         element: <FTALandingPage />,
+      },
+      {
+        path: 'modules/rbd',
+        element: <RBDLandingPage />,
       },
     ],
   },

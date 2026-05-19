@@ -160,6 +160,7 @@ export function Solutions() {
       name: 'RBD',
       label: 'Reliability Block\nDiagram',
       color: '#14b8a6',
+      link: '/modules/rbd',
       icon: (
         <svg viewBox="0 0 80 80" fill="none" className="w-[60%] h-[60%] relative z-[1]">
           <rect x="15" y="15" width="20" height="20" rx="3" fill="#14b8a6" opacity="0.6" />

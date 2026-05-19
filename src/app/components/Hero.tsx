@@ -1,6 +1,10 @@
 import { CheckCircle, Cloud, Users } from 'lucide-react';
+import { useState } from 'react';
+import { ContactFormModal } from './ContactForm';
 
 export function Hero() {
+  const [open, setOpen] = useState(false);
+
   return (
     <section className="relative min-h-[400px] overflow-hidden bg-gradient-to-r from-[#432975] via-[#6b3fa0] to-[#e8722a]">
       {/* Radial gradients */}
@@ -124,13 +128,13 @@ export function Hero() {
 
         {/* CTA Buttons */}
         <div className="flex flex-wrap gap-4 mb-16">
-          <a
-            href="#contact"
+          <button
+            onClick={() => setOpen(true)}
             className="inline-block px-8 py-3.5 bg-[var(--rams-accent)] text-white rounded-md uppercase tracking-wider hover:bg-[var(--rams-accent-dark)] transition-colors text-sm"
             style={{ fontFamily: 'var(--ff-head)', fontWeight: 700 }}
           >
             REQUEST A DEMO
-          </a>
+          </button>
           <a
             href="#modules"
             className="inline-block px-8 py-3.5 bg-white/10 text-white border border-white/30 rounded-md uppercase tracking-wider hover:bg-white/20 transition-colors text-sm backdrop-blur-sm"
@@ -141,6 +145,8 @@ export function Hero() {
         </div>
 
       </div>
+
+      <ContactFormModal open={open} onOpenChange={setOpen} />
 
       <style>{`
         @keyframes curve-spin {

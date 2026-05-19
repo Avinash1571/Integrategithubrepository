@@ -406,8 +406,8 @@ export function PBSLandingPage() {
             </div>
           </div>
         </div>
-        {open && <ContactFormModal onClose={() => setOpen(false)} />}
       </section>
+      <ContactFormModal open={open} onOpenChange={setOpen} />
 
       {/* Footer */}
       <footer className="bg-[var(--rams-primary-deep)] text-white/45 py-8">

@@ -200,99 +200,93 @@ export function FTALandingPage() {
       </section>
 
       {/* What is FTA Section */}
-      <section className="py-20 bg-white">
+      <section className="py-24 bg-white">
         <div className="max-w-[1280px] mx-auto px-10">
-          <div className="text-center mb-16">
-            <h2 className="text-[2.5rem] text-[var(--rams-primary)] mb-6 uppercase tracking-[0.02em]" style={{ fontFamily: 'var(--ff-head)', fontWeight: 700 }}>
-              What is Fault Tree Analysis?
-            </h2>
-            <div className="max-w-[900px] mx-auto">
-              <p className="text-[1.1rem] text-[var(--rams-gray-600)] leading-[1.8] mb-6">
-                <strong>Fault Tree Analysis (FTA)</strong> is a graphical reliability and safety analysis method used to identify the root causes of system failures. It starts with an undesired system event (Top Event) and breaks it down into lower-level failures using logical gates such as <strong>AND, OR, and XOR</strong>.
-              </p>
-              <p className="text-[1.1rem] text-[var(--rams-gray-600)] leading-[1.8] mb-6">
-                FTA helps engineers understand how component failures, software issues, or human errors can combine to cause critical system failures. It is widely used in safety-critical industries such as <strong>aerospace, automotive, defense, railways, and industrial systems</strong>.
-              </p>
-              <p className="text-[1.1rem] text-[var(--rams-gray-600)] leading-[1.8] mb-6">
-                Using quantitative and qualitative analysis methods, FTA calculates <strong>failure probability, system unavailability, Minimal Cut Sets (MCS), and critical failure paths</strong>. It helps improve system safety, optimize design reliability, and reduce operational risks.
-              </p>
-              <p className="text-[1.1rem] text-[var(--rams-gray-600)] leading-[1.8]">
-                Fault Trees also support integration with Reliability, FMECA, and Safety analyses, enabling complete system-level risk assessment and reliability evaluation.
-              </p>
-            </div>
-          </div>
-
-          {/* Quote */}
-          <div className="max-w-[800px] mx-auto mb-16">
-            <blockquote className="relative p-8 bg-gradient-to-br from-[#ec4899]/10 to-[#ec4899]/5 rounded-2xl border-l-4 border-[#ec4899]">
-              <p className="text-[1.3rem] text-[var(--rams-primary)] italic leading-[1.7]" style={{ fontFamily: 'var(--ff-head)' }}>
-                "FTA transforms complex system failures into clear logical relationships, helping engineers predict, prevent, and control critical risks."
-              </p>
-            </blockquote>
-          </div>
-
-          {/* Key Metrics Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {/* Q(t) - Unavailability */}
-            <div className="text-center p-8 bg-gradient-to-br from-[#ec4899]/10 to-[#ec4899]/5 rounded-xl border border-[#ec4899]/20 hover:shadow-lg transition-shadow">
-              <div className="w-20 h-20 mx-auto mb-4 bg-[#ec4899] rounded-full flex items-center justify-center">
-                <span className="text-white text-[2rem] font-bold" style={{ fontFamily: 'var(--ff-head)' }}>Q(t)</span>
+          <div className="max-w-[900px] mx-auto">
+            <div className="space-y-8 mb-12">
+              <div>
+                <h2 className="text-[2rem] text-[var(--rams-primary)] mb-6 uppercase tracking-[0.03em] text-center" style={{ fontFamily: 'var(--ff-head)', fontWeight: 700 }}>
+                  What is Fault Tree Analysis?
+                </h2>
+                <p className="text-[1.1rem] text-[var(--rams-gray-700)] leading-[1.8] mb-6">
+                  <strong>Fault Tree Analysis (FTA)</strong> is a graphical reliability and safety analysis method used to identify the root causes of system failures. It starts with an undesired system event (Top Event) and breaks it down into lower-level failures using logical gates such as <strong>AND, OR, and XOR</strong>.
+                </p>
+                <p className="text-[1.1rem] text-[var(--rams-gray-700)] leading-[1.8] mb-6">
+                  FTA helps engineers understand how component failures, software issues, or human errors can combine to cause critical system failures. It is widely used in safety-critical industries such as <strong>aerospace, automotive, defense, railways, and industrial systems</strong>.
+                </p>
+                <p className="text-[1.1rem] text-[var(--rams-gray-700)] leading-[1.8] mb-6">
+                  Using quantitative and qualitative analysis methods, FTA calculates <strong>failure probability, system unavailability, Minimal Cut Sets (MCS), and critical failure paths</strong>. It helps improve system safety, optimize design reliability, and reduce operational risks.
+                </p>
+                <p className="text-[1.1rem] text-[var(--rams-gray-700)] leading-[1.8] mb-6">
+                  Fault Trees also support integration with Reliability, FMECA, and Safety analyses, enabling complete system-level risk assessment and reliability evaluation.
+                </p>
               </div>
-              <h3 className="text-[1.2rem] text-[var(--rams-primary)] mb-3 uppercase tracking-[0.04em]" style={{ fontFamily: 'var(--ff-head)', fontWeight: 700 }}>
-                Unavailability
-              </h3>
-              <p className="text-[0.95rem] text-[var(--rams-gray-600)] leading-[1.6]">
-                Probability of system failure at time t
-              </p>
+
+              <div className="bg-gradient-to-r from-[#ec4899]/10 to-transparent border-l-4 border-[#ec4899] p-8 rounded-r">
+                <p className="text-[1.05rem] text-[var(--rams-gray-700)] italic leading-[1.8]">
+                  "FTA transforms complex system failures into clear logical relationships, helping engineers predict, prevent, and control critical risks."
+                </p>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div className="bg-white border-2 border-[var(--rams-gray-200)] rounded-xl p-8 text-center hover:border-[#ec4899]/50 hover:shadow-lg transition-all">
+                  <div className="text-[3rem] text-[#ec4899] mb-3" style={{ fontFamily: 'var(--ff-head)', fontWeight: 800 }}>
+                    Q(t)
+                  </div>
+                  <h3 className="text-[1rem] text-[var(--rams-primary)] mb-2 uppercase tracking-[0.05em]" style={{ fontFamily: 'var(--ff-head)', fontWeight: 700 }}>
+                    Unavailability
+                  </h3>
+                  <p className="text-[0.9rem] text-[var(--rams-gray-600)] leading-[1.6]">
+                    Probability of system failure at time t
+                  </p>
+                </div>
+
+                <div className="bg-white border-2 border-[var(--rams-gray-200)] rounded-xl p-8 text-center hover:border-[#ec4899]/50 hover:shadow-lg transition-all">
+                  <div className="text-[2.5rem] text-[#ec4899] mb-3" style={{ fontFamily: 'var(--ff-head)', fontWeight: 800 }}>
+                    MCS
+                  </div>
+                  <h3 className="text-[1rem] text-[var(--rams-primary)] mb-2 uppercase tracking-[0.05em]" style={{ fontFamily: 'var(--ff-head)', fontWeight: 700 }}>
+                    Minimal Cut Sets
+                  </h3>
+                  <p className="text-[0.9rem] text-[var(--rams-gray-600)] leading-[1.6]">
+                    Critical failure combinations causing top event
+                  </p>
+                </div>
+
+                <div className="bg-white border-2 border-[var(--rams-gray-200)] rounded-xl p-8 text-center hover:border-[#ec4899]/50 hover:shadow-lg transition-all">
+                  <div className="text-[3rem] text-[#ec4899] mb-3" style={{ fontFamily: 'var(--ff-head)', fontWeight: 800 }}>
+                    λ
+                  </div>
+                  <h3 className="text-[1rem] text-[var(--rams-primary)] mb-2 uppercase tracking-[0.05em]" style={{ fontFamily: 'var(--ff-head)', fontWeight: 700 }}>
+                    Failure Rate
+                  </h3>
+                  <p className="text-[0.9rem] text-[var(--rams-gray-600)] leading-[1.6]">
+                    Failure occurrence frequency of events
+                  </p>
+                </div>
+              </div>
             </div>
 
-            {/* MCS - Minimal Cut Sets */}
-            <div className="text-center p-8 bg-gradient-to-br from-[#ec4899]/10 to-[#ec4899]/5 rounded-xl border border-[#ec4899]/20 hover:shadow-lg transition-shadow">
-              <div className="w-20 h-20 mx-auto mb-4 bg-[#ec4899] rounded-full flex items-center justify-center">
-                <span className="text-white text-[1.8rem] font-bold" style={{ fontFamily: 'var(--ff-head)' }}>MCS</span>
-              </div>
-              <h3 className="text-[1.2rem] text-[var(--rams-primary)] mb-3 uppercase tracking-[0.04em]" style={{ fontFamily: 'var(--ff-head)', fontWeight: 700 }}>
-                Minimal Cut Sets
-              </h3>
-              <p className="text-[0.95rem] text-[var(--rams-gray-600)] leading-[1.6]">
-                Critical failure combinations causing top event
-              </p>
-            </div>
-
-            {/* λ - Failure Rate */}
-            <div className="text-center p-8 bg-gradient-to-br from-[#ec4899]/10 to-[#ec4899]/5 rounded-xl border border-[#ec4899]/20 hover:shadow-lg transition-shadow">
-              <div className="w-20 h-20 mx-auto mb-4 bg-[#ec4899] rounded-full flex items-center justify-center">
-                <span className="text-white text-[2rem] font-bold" style={{ fontFamily: 'var(--ff-head)' }}>λ</span>
-              </div>
-              <h3 className="text-[1.2rem] text-[var(--rams-primary)] mb-3 uppercase tracking-[0.04em]" style={{ fontFamily: 'var(--ff-head)', fontWeight: 700 }}>
-                Failure Rate
-              </h3>
-              <p className="text-[0.95rem] text-[var(--rams-gray-600)] leading-[1.6]">
-                Failure occurrence frequency of events
-              </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <button
+                onClick={() => setOpen(true)}
+                className="inline-block px-10 py-4 bg-[var(--rams-accent)] text-white text-[0.9rem] tracking-[0.06em] uppercase rounded transition-all shadow-[0_4px_20px_rgba(232,114,42,0.3)] hover:bg-[var(--rams-accent-dark)] hover:-translate-y-[2px] text-center"
+                style={{ fontFamily: "var(--ff-head)", fontWeight: 700 }}
+              >
+                Request Beta Access
+              </button>
+              <Link
+                to="/#modules"
+                className="inline-block px-10 py-4 border-2 border-[var(--rams-gray-300)] text-[var(--rams-primary)] text-[0.9rem] tracking-[0.06em] uppercase rounded transition-all hover:bg-[var(--rams-gray-100)] hover:border-[var(--rams-gray-400)] text-center"
+                style={{ fontFamily: "var(--ff-head)", fontWeight: 700 }}
+              >
+                Back to All Modules
+              </Link>
             </div>
           </div>
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-20 bg-[var(--rams-primary-deep)] text-white">
-        <div className="max-w-[1280px] mx-auto px-10 text-center">
-          <h2 className="text-[2.5rem] mb-6 uppercase tracking-[0.02em]" style={{ fontFamily: 'var(--ff-head)', fontWeight: 700 }}>
-            Ready to Analyze System Failures?
-          </h2>
-          <p className="text-[1.2rem] text-white/80 max-w-[700px] mx-auto mb-8 leading-[1.7]">
-            Start using Fault Tree Analysis in RAMS360 to identify root causes and improve system reliability.
-          </p>
-          <button
-            onClick={() => setOpen(true)}
-            className="inline-block px-10 py-4 bg-[#ec4899] text-white rounded-md uppercase tracking-wider hover:bg-[#db2777] transition-colors text-sm"
-            style={{ fontFamily: 'var(--ff-head)', fontWeight: 700 }}
-          >
-            Request a Demo
-          </button>
-        </div>
-      </section>
 
       <ContactFormModal open={open} onOpenChange={setOpen} />
     </div>

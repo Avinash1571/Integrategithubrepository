@@ -47,7 +47,7 @@ export function CTA() {
       </section>
 
       {/* ✅ MODAL */}
-      {open && <ContactFormModal onClose={() => setOpen(false)} />}
+      <ContactFormModal open={open} onOpenChange={setOpen} />
     </>
   );
 }
