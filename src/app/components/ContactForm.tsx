@@ -1,0 +1,753 @@
+import React, { useState } from "react";
+
+const ENQUIRY_TYPES = ["Beta Access", "Demo", "Partnership"];
+
+interface FormData {
+  fullName: string;
+  workEmail: string;
+  phone: string;
+  company: string;
+  role: string;
+  country: string;
+  enquiryType: string;
+  message: string;
+  consent: boolean;
+}
+
+const EMPTY_FORM: FormData = {
+  fullName: "",
+  workEmail: "",
+  phone: "",
+  company: "",
+  role: "",
+  country: "",
+  enquiryType: "Beta Access",
+  message: "",
+  consent: false,
+};
+
+export function ContactFormModal({ onClose }: { onClose: () => void }) {
+  const [formData, setFormData] = useState<FormData>(EMPTY_FORM);
+  const [loading, setLoading] = useState(false);
+  const [errors, setErrors] = useState<Partial<Record<keyof FormData, string>>>({});
+  const [popup, setPopup] = useState({ show: false, message: "", success: true });
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+  ) => {
+    const { name, value, type } = e.target;
+    const checked = (e.target as HTMLInputElement).checked;
+    setFormData((prev) => ({ ...prev, [name]: type === "checkbox" ? checked : value }));
+    setErrors((prev) => ({ ...prev, [name]: "" }));
+  };
+
+  const validate = (): boolean => {
+    const e: Partial<Record<keyof FormData, string>> = {};
+    if (!formData.fullName) e.fullName = "Full name is required";
+    if (!formData.workEmail) e.workEmail = "Email is required";
+    else if (!/\S+@\S+\.\S+/.test(formData.workEmail)) e.workEmail = "Invalid email";
+    if (!formData.phone) e.phone = "Phone number is required";
+    else if (!/^[0-9]{10}$/.test(formData.phone)) e.phone = "Enter valid 10-digit phone number";
+    if (!formData.company) e.company = "Company is required";
+    if (!formData.role) e.role = "Role is required";
+    if (!formData.country) e.country = "Country is required";
+    if (!formData.message) e.message = "Message is required";
+    if (!formData.consent) e.consent = "Consent is required";
+    setErrors(e);
+    return Object.keys(e).length === 0;
+  };
+
+  const handleSubmit = async () => {
+    if (!validate()) return;
+    setLoading(true);
+    try {
+      const res = await fetch("https://api.rams360tech.com/api/v1/enquiry", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+      const data = await res.json();
+      if (res.status === 201) {
+        setPopup({ show: true, message: "Enquiry submitted successfully", success: true });
+        setFormData(EMPTY_FORM);
+        setErrors({});
+      } else {
+        setPopup({ show: true, message: data.message || "Something went wrong", success: false });
+      }
+    } catch {
+      setPopup({ show: true, message: "Server error", success: false });
+    }
+    setLoading(false);
+  };
+
+  return (
+    <>
+      <style>{`
+
+        .rfm-backdrop {
+          position: fixed;
+          top: 0; left: 0; right: 0; bottom: 0;
+          z-index: 9999;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background: rgba(0,0,0,0.55);
+          backdrop-filter: blur(4px);
+          padding: 16px;
+          box-sizing: border-box;
+        }
+
+        .rfm-modal {
+          display: flex;
+          flex-direction: row;
+          width: 100%;
+          max-width: 960px;
+          height: calc(100vh - 120px);
+          max-height: 720px;
+          min-height: 480px;
+          border-radius: 18px;
+          overflow: hidden;
+          box-shadow: 0 24px 64px rgba(0,0,0,0.35);
+        }
+
+        /* LEFT — never scrolls */
+        .rfm-left {
+          width: 45%;
+          flex-shrink: 0;
+          background: linear-gradient(to bottom, #1a1446, #ff7a2f);
+          color: #fff;
+          padding: 36px 30px;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          overflow: hidden;
+          box-sizing: border-box;
+          font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+        }
+
+        .rfm-left h2 {
+          font-size: 1.75rem;
+          font-weight: 700;
+          line-height: 1.25;
+          margin: 0 0 12px;
+          font-family: inherit;
+          word-break: break-word;
+        }
+
+        .rfm-left-sub {
+          font-size: 0.875rem;
+          opacity: 0.82;
+          line-height: 1.6;
+          margin: 0 0 28px;
+        }
+
+        .rfm-steps {
+          display: flex;
+          flex-direction: column;
+          gap: 20px;
+        }
+
+        .rfm-step {
+          display: flex;
+          align-items: flex-start;
+          gap: 14px;
+        }
+
+        .rfm-step-num {
+          width: 30px;
+          height: 30px;
+          border-radius: 50%;
+          background: rgba(255,255,255,0.2);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 0.8rem;
+          font-weight: 700;
+          flex-shrink: 0;
+        }
+
+        .rfm-step-title {
+          font-weight: 600;
+          font-size: 0.875rem;
+          margin-bottom: 3px;
+        }
+
+        .rfm-step-desc {
+          font-size: 0.8rem;
+          opacity: 0.78;
+          line-height: 1.5;
+        }
+
+        .rfm-left-footer {
+          font-size: 0.72rem;
+          opacity: 0.6;
+          line-height: 1.5;
+          margin-top: 20px;
+        }
+
+        /* RIGHT — flex column, only body scrolls */
+        .rfm-right {
+          flex: 1;
+          display: flex;
+          flex-direction: column;
+          background: #fff;
+          overflow: hidden;
+          position: relative;
+          min-width: 0;
+          font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+        }
+
+        /* Pinned header */
+        .rfm-right-header {
+          flex-shrink: 0;
+          padding: 22px 36px 14px;
+          border-bottom: 1px solid #e5e7eb;
+          box-sizing: border-box;
+        }
+
+        .rfm-right-header h3 {
+          font-size: 1.2rem;
+          font-weight: 600;
+          color: #111827;
+          margin: 0 0 4px;
+          font-family: inherit;
+        }
+
+        .rfm-right-header p {
+          font-size: 0.875rem;
+          color: #6b7280;
+          margin: 0;
+        }
+
+        /* Close */
+        .rfm-close {
+          position: absolute;
+          top: 14px;
+          right: 14px;
+          width: 32px;
+          height: 32px;
+          border: none;
+          background: #f3f4f6;
+          border-radius: 50%;
+          cursor: pointer;
+          font-size: 1rem;
+          color: #6b7280;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          z-index: 5;
+          transition: background 0.15s;
+        }
+        .rfm-close:hover { background: #e5e7eb; color: #111827; }
+
+        /* Scrollable body — invisible scrollbar */
+        .rfm-body {
+          flex: 1;
+          min-height: 0;
+          overflow-y: auto;
+          padding: 18px 36px 8px;
+          box-sizing: border-box;
+          scrollbar-width: none;
+          -ms-overflow-style: none;
+        }
+        .rfm-body::-webkit-scrollbar { display: none; }
+
+        /* Pinned footer */
+        .rfm-footer {
+          flex-shrink: 0;
+          padding: 12px 36px 20px;
+          border-top: 1px solid #e5e7eb;
+          background: #fff;
+          box-sizing: border-box;
+        }
+
+        /* Form rows */
+        .rfm-row {
+          display: grid;
+          grid-template-columns: minmax(0,1fr) minmax(0,1fr);
+          gap: 14px;
+          margin-bottom: 2px;
+        }
+
+        .rfm-field {
+          display: flex;
+          flex-direction: column;
+          min-width: 0;
+        }
+
+        /* Always-reserved error height — modal never shifts */
+        .rfm-err {
+          font-size: 0.72rem;
+          color: #ef4444;
+          min-height: 16px;
+          margin-top: 3px;
+          line-height: 1;
+        }
+
+        .rfm-row-gap { margin-bottom: 2px; }
+
+        /* Input — exact original styles */
+        .rfm-input {
+          width: 100%;
+          padding: 12px 14px;
+          border-radius: 10px;
+          border: 1px solid #e5e7eb;
+          outline: none;
+          font-size: 14px;
+          font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+          color: #111827;
+          background: #fff;
+          box-sizing: border-box;
+          transition: border-color 0.15s, box-shadow 0.15s;
+        }
+        .rfm-input:focus {
+          border-color: #ff7a2f;
+          box-shadow: 0 0 0 2px rgba(255,122,47,0.2);
+        }
+        .rfm-input.err { border-color: #ef4444; }
+        .rfm-input.err:focus {
+          border-color: #ef4444;
+          box-shadow: 0 0 0 2px rgba(239,68,68,0.18);
+        }
+
+        textarea.rfm-input {
+          resize: none;
+          height: 100px;
+          line-height: 1.5;
+        }
+
+        select.rfm-input { cursor: pointer; }
+
+        /* Consent */
+        .rfm-consent {
+          display: flex;
+          align-items: flex-start;
+          gap: 8px;
+        }
+        .rfm-consent input[type="checkbox"] {
+          margin-top: 2px;
+          cursor: pointer;
+          flex-shrink: 0;
+          width: 14px;
+          height: 14px;
+        }
+        .rfm-consent label {
+          font-size: 0.75rem;
+          color: #4b5563;
+          cursor: pointer;
+          line-height: 1.5;
+        }
+
+        /* Submit */
+        .rfm-submit {
+          width: 100%;
+          padding: 12px 24px;
+          background: #f97316;
+          color: #fff;
+          border: none;
+          border-radius: 8px;
+          font-size: 0.875rem;
+          font-weight: 600;
+          cursor: pointer;
+          font-family: inherit;
+          transition: background 0.15s;
+        }
+        .rfm-submit:hover:not(:disabled) { background: #ea6c0a; }
+        .rfm-submit:disabled { opacity: 0.6; cursor: not-allowed; }
+
+        /* Popup */
+        .rfm-popup-bg {
+          position: fixed;
+          top: 0; left: 0; right: 0; bottom: 0;
+          z-index: 10000;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background: rgba(0,0,0,0.5);
+          padding: 16px;
+          box-sizing: border-box;
+        }
+        .rfm-popup {
+          background: #fff;
+          border-radius: 12px;
+          padding: 24px;
+          text-align: center;
+          width: 100%;
+          max-width: 320px;
+          box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+          font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+        }
+        .rfm-popup-icon {
+          width: 60px;
+          height: 60px;
+          border-radius: 50%;
+          border: 2px solid;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin: 0 auto 14px;
+          font-size: 1.4rem;
+        }
+        .rfm-popup-icon.ok   { border-color: #86efac; color: #22c55e; }
+        .rfm-popup-icon.fail { border-color: #f87171; color: #ef4444; }
+        .rfm-popup h4 {
+          margin: 0 0 16px;
+          font-size: 1.1rem;
+          font-weight: 600;
+          color: #111827;
+        }
+        .rfm-popup-btn {
+          background: #3b82f6;
+          color: #fff;
+          border: none;
+          padding: 9px 28px;
+          border-radius: 8px;
+          font-size: 0.875rem;
+          font-weight: 500;
+          cursor: pointer;
+          font-family: inherit;
+          transition: background 0.15s;
+        }
+        .rfm-popup-btn:hover { background: #2563eb; }
+
+        /* ── MOBILE ≤ 600px ── */
+        @media (max-width: 600px) {
+          .rfm-backdrop {
+            align-items: flex-end;
+            padding: 0;
+          }
+
+          .rfm-modal {
+            flex-direction: column;
+            width: 100%;
+            max-width: 100%;
+            height: 96vh;
+            max-height: 96vh;
+            min-height: unset;
+            border-radius: 16px 16px 0 0;
+            box-shadow: 0 -6px 32px rgba(0,0,0,0.25);
+          }
+
+          .rfm-left {
+            width: 100%;
+            flex-shrink: 0;
+            padding: 18px 18px 14px;
+            justify-content: flex-start;
+            gap: 0;
+          }
+
+          .rfm-left h2 {
+            font-size: 1.1rem;
+            margin: 0 0 6px;
+          }
+
+          .rfm-left-sub {
+            font-size: 0.78rem;
+            margin: 0 0 10px;
+          }
+
+          .rfm-steps {
+            flex-direction: row;
+            gap: 8px;
+            overflow-x: auto;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            padding-bottom: 2px;
+          }
+          .rfm-steps::-webkit-scrollbar { display: none; }
+
+          .rfm-step {
+            flex-direction: column;
+            gap: 4px;
+            flex: 0 0 auto;
+            min-width: 110px;
+            background: rgba(255,255,255,0.12);
+            border-radius: 8px;
+            padding: 8px;
+          }
+
+          .rfm-step-num {
+            width: 22px;
+            height: 22px;
+            font-size: 0.7rem;
+          }
+
+          .rfm-step-title { font-size: 0.72rem; }
+          .rfm-step-desc  { font-size: 0.68rem; }
+
+          .rfm-left-footer { display: none; }
+
+          .rfm-right {
+            flex: 1;
+            min-height: 0;
+          }
+
+          .rfm-right-header {
+            padding: 14px 18px 10px;
+          }
+
+          .rfm-right-header h3 { font-size: 1rem; }
+          .rfm-right-header p  { font-size: 0.8rem; }
+
+          .rfm-close {
+            top: 10px;
+            right: 12px;
+            width: 28px;
+            height: 28px;
+            font-size: 0.9rem;
+          }
+
+          .rfm-body {
+            padding: 14px 18px 6px;
+          }
+
+          /* Single column on mobile */
+          .rfm-row {
+            grid-template-columns: 1fr;
+            gap: 0;
+          }
+
+          /* font-size 16px stops iOS Safari from zooming on input focus */
+          .rfm-input {
+            font-size: 16px;
+            padding: 11px 12px;
+            border-radius: 8px;
+          }
+
+          textarea.rfm-input { height: 80px; }
+
+          .rfm-footer {
+            padding: 10px 18px 18px;
+          }
+
+          .rfm-submit {
+            font-size: 0.9rem;
+            padding: 11px 20px;
+          }
+        }
+
+        /* ── SMALL TABLET 601px – 767px ── */
+        @media (min-width: 601px) and (max-width: 767px) {
+          .rfm-modal {
+            height: calc(100vh - 100px);
+          }
+
+          .rfm-left {
+            width: 42%;
+            padding: 26px 22px;
+          }
+
+          .rfm-left h2 { font-size: 1.4rem; }
+          .rfm-left-sub { font-size: 0.82rem; margin-bottom: 18px; }
+
+          .rfm-right-header { padding: 18px 24px 12px; }
+          .rfm-body          { padding: 14px 24px 8px; }
+          .rfm-footer        { padding: 10px 24px 16px; }
+
+          .rfm-input { padding: 10px 12px; }
+        }
+
+      `}</style>
+
+      <div className="rfm-backdrop">
+        <div className="rfm-modal">
+
+          {/* LEFT */}
+          <div className="rfm-left">
+            <div>
+              <h2>Get in touch with RAMS360</h2>
+              <p className="rfm-left-sub">
+                Share your use case and interest. We will review your request and get back to you with next steps.
+              </p>
+              <div className="rfm-steps">
+                {[
+                  { title: "Beta access",     desc: "For engineering teams, researchers, and practitioners." },
+                  { title: "Direct response", desc: "Responses are routed to your team mailbox immediately." },
+                  { title: "Zoho-ready",      desc: "Connect this to Zoho Forms or your own endpoint later." },
+                ].map((s, i) => (
+                  <div className="rfm-step" key={i}>
+                    <div className="rfm-step-num">{i + 1}</div>
+                    <div>
+                      <div className="rfm-step-title">{s.title}</div>
+                      <div className="rfm-step-desc">{s.desc}</div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <p className="rfm-left-footer">
+              Current default delivery: email fallback. Configure endpoint later.
+            </p>
+          </div>
+
+          {/* RIGHT */}
+          <div className="rfm-right">
+
+            <div className="rfm-right-header">
+              <h3>Request Beta Access</h3>
+              <p>Fill in the details below. Required fields are kept minimal.</p>
+            </div>
+
+            <button className="rfm-close" onClick={onClose} aria-label="Close">✕</button>
+
+            <div className="rfm-body">
+
+              <div className="rfm-row rfm-row-gap">
+                <Field error={errors.fullName}>
+                  <input
+                    name="fullName"
+                    value={formData.fullName}
+                    onChange={handleChange}
+                    className={`rfm-input${errors.fullName ? " err" : ""}`}
+                    placeholder="Full Name"
+                  />
+                </Field>
+                <Field error={errors.workEmail}>
+                  <input
+                    name="workEmail"
+                    value={formData.workEmail}
+                    onChange={handleChange}
+                    className={`rfm-input${errors.workEmail ? " err" : ""}`}
+                    placeholder="Work Email"
+                  />
+                </Field>
+              </div>
+
+              <div className="rfm-row rfm-row-gap">
+                <Field error={errors.phone}>
+                  <input
+                    name="phone"
+                    value={formData.phone}
+                    onChange={handleChange}
+                    className={`rfm-input${errors.phone ? " err" : ""}`}
+                    placeholder="Phone Number"
+                    maxLength={10}
+                  />
+                </Field>
+                <Field error={errors.company}>
+                  <input
+                    name="company"
+                    value={formData.company}
+                    onChange={handleChange}
+                    className={`rfm-input${errors.company ? " err" : ""}`}
+                    placeholder="Company / Institution"
+                  />
+                </Field>
+              </div>
+
+              <div className="rfm-row rfm-row-gap">
+                <Field error={errors.role}>
+                  <input
+                    name="role"
+                    value={formData.role}
+                    onChange={handleChange}
+                    className={`rfm-input${errors.role ? " err" : ""}`}
+                    placeholder="Role"
+                  />
+                </Field>
+                <Field error={errors.country}>
+                  <input
+                    name="country"
+                    value={formData.country}
+                    onChange={handleChange}
+                    className={`rfm-input${errors.country ? " err" : ""}`}
+                    placeholder="Country"
+                  />
+                </Field>
+              </div>
+
+              <div className="rfm-field rfm-row-gap">
+                <select
+                  name="enquiryType"
+                  value={formData.enquiryType}
+                  onChange={handleChange}
+                  className="rfm-input"
+                >
+                  {ENQUIRY_TYPES.map((t) => <option key={t}>{t}</option>)}
+                </select>
+                <div className="rfm-err" />
+              </div>
+
+              <div className="rfm-field rfm-row-gap">
+                <textarea
+                  name="message"
+                  value={formData.message}
+                  onChange={handleChange}
+                  className={`rfm-input${errors.message ? " err" : ""}`}
+                  placeholder="Tell us what you want to evaluate, build, or discuss."
+                />
+                <div className="rfm-err">{errors.message ?? ""}</div>
+              </div>
+
+              <div style={{ marginBottom: 2 }}>
+                <div className="rfm-consent">
+                  <input
+                    type="checkbox"
+                    id="rfm-consent"
+                    name="consent"
+                    checked={formData.consent}
+                    onChange={handleChange}
+                  />
+                  <label htmlFor="rfm-consent">
+                    I agree to be contacted about RAMS360.
+                  </label>
+                </div>
+                <div className="rfm-err" style={{ paddingLeft: 22 }}>
+                  {errors.consent ?? ""}
+                </div>
+              </div>
+
+            </div>
+
+            <div className="rfm-footer">
+              <button
+                className="rfm-submit"
+                onClick={handleSubmit}
+                disabled={loading}
+              >
+                {loading ? "Sending..." : "SEND INQUIRY"}
+              </button>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+
+      {popup.show && (
+        <div className="rfm-popup-bg">
+          <div className="rfm-popup">
+            <div className={`rfm-popup-icon ${popup.success ? "ok" : "fail"}`}>
+              <span>{popup.success ? "✔" : "✖"}</span>
+            </div>
+            <h4>{popup.message}</h4>
+            <button
+              className="rfm-popup-btn"
+              onClick={() => {
+                setPopup((p) => ({ ...p, show: false }));
+                if (popup.success) onClose();
+              }}
+            >
+              OK
+            </button>
+          </div>
+        </div>
+      )}
+    </>
+  );
+}
+
+function Field({
+  children,
+  error,
+}: {
+  children: React.ReactNode;
+  error?: string;
+}) {
+  return (
+    <div className="rfm-field">
+      {children}
+      <div className="rfm-err">{error ?? ""}</div>
+    </div>
+  );
+}
