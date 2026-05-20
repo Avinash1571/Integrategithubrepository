@@ -9,6 +9,7 @@ import { SparesLandingPage } from './pages/SparesLandingPage';
 import { SafetyLandingPage } from './pages/SafetyLandingPage';
 import { FTALandingPage } from './pages/FTALandingPage';
 import { RBDLandingPage } from './pages/RBDLandingPage';
+import { ReportsLandingPage } from './pages/ReportsLandingPage';
 import { Demo } from './pages/Demo';
 import { ScrollToHash } from './components/ScrollToHash';
 
@@ -69,6 +70,10 @@ export const router = createBrowserRouter([
       {
         path: 'modules/rbd',
         element: <RBDLandingPage />,
+      },
+      {
+        path: 'modules/reports',
+        element: <ReportsLandingPage />,
       },
     ],
   },

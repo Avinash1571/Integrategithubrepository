@@ -174,6 +174,25 @@ export function Solutions() {
       description: 'Model system reliability and component dependencies using block diagrams.',
       tagline: 'System reliability structure',
     },
+    {
+      id: 'reports',
+      name: 'Reports',
+      label: 'Reports',
+      color: '#06b6d4',
+      link: '/modules/reports',
+      icon: (
+        <svg viewBox="0 0 80 80" fill="none" className="w-[60%] h-[60%] relative z-[1]">
+          <rect x="20" y="15" width="40" height="50" rx="4" fill="#06b6d4" opacity="0.3" />
+          <rect x="25" y="10" width="30" height="50" rx="3" fill="#06b6d4" opacity="0.6" />
+          <line x1="30" y1="22" x2="50" y2="22" stroke="#06b6d4" strokeWidth="2" strokeLinecap="round" />
+          <line x1="30" y1="30" x2="50" y2="30" stroke="#06b6d4" strokeWidth="2" strokeLinecap="round" />
+          <line x1="30" y1="38" x2="45" y2="38" stroke="#06b6d4" strokeWidth="2" strokeLinecap="round" />
+          <line x1="30" y1="46" x2="48" y2="46" stroke="#06b6d4" strokeWidth="2" strokeLinecap="round" />
+        </svg>
+      ),
+      description: 'Generate and download project reports across all analysis modules.',
+      tagline: 'Consolidated reporting',
+    },
   ];
 
   return (
@@ -188,7 +207,7 @@ export function Solutions() {
         </h2>
         <p className="text-center text-white/55 text-[0.95rem] max-w-[720px] mx-auto mb-14 leading-[1.7] animate-fade-in-up">
           Every module is linked. PBS forms the base. Failure rates feed FMECA. FMECA drives maintenance.
-          RAMS360 connects PBS, Failure Prediction, MTTR, FMECA, Maintenance, Spare Parts, Safety, FTA, and RBD into one unified reliability ecosystem.
+          RAMS360 connects PBS, Failure Prediction, MTTR, FMECA, Maintenance, Spare Parts, Safety, FTA, RBD, and Reports into one unified reliability ecosystem.
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 animate-fade-in-up">

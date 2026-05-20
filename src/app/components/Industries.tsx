@@ -5,16 +5,16 @@ const industries = [
     id: "aerospace",
     label: "Aerospace & Defense",
     icon: "✈",
-    tagline: "Precision Beyond Gravity",
+    tagline: "Where airworthiness meets accountability",
     heading: "RAMS Engineering for Aerospace & Defense",
     description:
-      "From avionics to UAV platforms, we unify FMEA, FTA, and RBD in a single connected system — so safety-critical decisions are always grounded in live, traceable data. Built for DO-178C, DO-254, and MIL-STD compliance environments.",
+      "Airworthiness certification cycles cost teams months of manual reconciliation. RAMS360 connects your FMEA, FTA, and RBD analyses in a single audit-ready environment — so every safety decision is traceable from component to certification document, with zero manual re-entry..",
     highlights: [
-      "Airworthiness & Certification Traceability",
-      "Avionics & Flight Control Reliability Analysis",
-      "UAV & Autonomous Platform FMEA",
-      "Radar & Sonar System Safety Modeling",
-      "Defense Network Criticality Assessment",
+      "Full DO-178C / DO-254 traceability from component to cert document",
+      "Avionics reliability modeling with live failure rate data (MIL-HDBK-217F)",
+      "FMEA workflows purpose-built for UAV and autonomous flight architectures",
+      "Radar & sonar safety models with linked FTA and severity classification",
+      "Criticality ranking for defense networks — MIL-STD-882 aligned",
     ],
     image:
       "https://images.unsplash.com/photo-1540575861501-7cf05a4b125a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxhZXJvc3BhY2UlMjBhaXJjcmFmdCUyMHJlbGlhYmlsaXR5JTIwZW5naW5lZXJpbmd8ZW58MXx8fHwxNzc5MTc0MjE0fDA&ixlib=rb-4.1.0&q=80&w=1080",
@@ -26,16 +26,16 @@ const industries = [
     id: "automotive",
     label: "Automotive & Mobility",
     icon: "⚡",
-    tagline: "Driving the Future Forward",
+    tagline: "Safety-first engineering, from silicon to road",
     heading: "RAMS Engineering for Automotive & Mobility",
     description:
-      "Connect functional safety analysis with system design evolution across the vehicle lifecycle. RAMS360 enables ISO 26262-aligned FMEA, FTA, and RBD workflows — reducing rework when architectures change.",
+      "When vehicle architectures evolve mid-program, FMEA rework cascades across every subsystem. RAMS360 propagates architecture changes automatically across linked safety analyses — so your ISO 26262 documentation stays current without a manual reconciliation sprint every design cycle.",
     highlights: [
-      "ISO 26262 Functional Safety Alignment",
-      "Powertrain & E/E System Reliability Modeling",
-      "ADAS & Autonomous Drive Safety Analysis",
-      "EV Battery Failure Mode Assessment",
-      "Supplier Quality & Lifecycle Traceability",
+      "ASIL decomposition and HARA workflows aligned to ISO 26262",
+      "E/E architecture reliability modeling — powertrain, chassis, ADAS",
+      "ADAS safety analysis with scenario-based failure mode coverage",
+      "EV battery FMEA with thermal runaway and cell-level failure tracking",
+      "Supplier failure data integration for end-to-end lifecycle traceability",
     ],
     image:
       "https://images.unsplash.com/photo-1567789884554-0b844b597180?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxhdXRvbW90aXZlJTIwdmVoaWNsZSUyMG1hbnVmYWN0dXJpbmclMjBzYWZldHl8ZW58MXx8fHwxNzc5MTc0MjE1fDA&ixlib=rb-4.1.0&q=80&w=1080",
@@ -47,16 +47,16 @@ const industries = [
     id: "railways",
     label: "Railways & Transportation",
     icon: "🚆",
-    tagline: "Moving Nations Reliably",
+    tagline: "Zero-tolerance reliability, across every lifecycle stage",
     heading: "RAMS Engineering for Railways & Transportation",
     description:
-      "Railway systems demand zero-tolerance RAMS. RAMS360 delivers EN 50126-aligned reliability, availability, and maintainability analysis — connected across rolling stock, signaling, and infrastructure lifecycle stages.",
+      "Railway safety leaves no margin for documentation gaps. RAMS360 delivers EN 50126-aligned RAM analysis connected across rolling stock, signaling, and infrastructure — so availability targets and maintenance plans stay synchronized through every lifecycle phase.",
     highlights: [
-      "EN 50126 RAMS Compliance Workflows",
-      "Rolling Stock Failure Mode Analysis",
-      "Signaling & Control System FTA",
-      "Preventive Maintenance Strategy Modeling",
-      "Fleet Availability & MTBF Tracking",
+      "EN 50126 compliance workflows with phase-gated RAM targets",
+      "Rolling stock FMEA with maintenance task linkage and interval modeling",
+      "Signaling system FTA with hazard rate allocation to subsystems",
+      "Preventive vs. predictive maintenance strategy optimizer",
+      "Fleet-level availability dashboard with live MTBF and MTTR tracking",
     ],
     image:
       "https://images.unsplash.com/photo-1580442374555-3def8fb41738?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxyYWlsd2F5JTIwdHJhaW4lMjB0cmFuc3BvcnRhdGlvbiUyMGluZnJhc3RydWN0dXJlfGVufDF8fHx8MTc3OTE3NDIxNnww&ixlib=rb-4.1.0&q=80&w=1080",
@@ -68,16 +68,16 @@ const industries = [
     id: "energy",
     label: "Energy & Utilities",
     icon: "🔋",
-    tagline: "Powering a Sustainable World",
+    tagline: "Grid reliability engineered, not assumed",
     heading: "RAMS Engineering for Energy & Utilities",
     description:
-      "Grid-critical systems leave no room for documentation gaps. RAMS360 connects reliability models with real operational data — giving energy engineers live fault-tree visibility and traceable maintenance decisions across asset lifecycles.",
+      "Grid failures have no buffer. RAMS360 connects your asset reliability models to real operational data — giving engineers live fault tree analysis, traceable maintenance decisions, and IEC 61511 / IEC 61508-aligned safety workflows across the full asset lifecycle.",
     highlights: [
-      "Asset Criticality & Failure Risk Ranking",
-      "Substation & Grid Component FTA",
-      "Renewable Energy System FMEA",
-      "Predictive Maintenance Integration",
-      "Regulatory Safety Lifecycle Traceability",
+      "Asset criticality ranking with risk-based inspection prioritization",
+      "Substation FTA with protection system failure mode coverage",
+      "Wind, solar, and storage system FMEA with degradation modeling",
+      "Condition-based and predictive maintenance planning integration",
+      "IEC 61511 / IEC 61508 safety lifecycle traceability and audit trail",
     ],
     image:
       "https://images.unsplash.com/photo-1497435334941-8c899ee9e8e9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxlbmVyZ3klMjBwb3dlciUyMGdyaWQlMjByZW5ld2FibGUlMjBpbmZyYXN0cnVjdHVyZXxlbnwxfHx8fDE3NzkxNzQyMTZ8MA&ixlib=rb-4.1.0&q=80&w=1080",
@@ -89,20 +89,20 @@ const industries = [
     id: "manufacturing",
     label: "Industrial Manufacturing",
     icon: "⚙",
-    tagline: "Precision at Industrial Scale",
+    tagline: "Every hour of downtime has a root cause — find it faster",
     heading: "RAMS Engineering for Industrial Manufacturing",
     description:
-      "Manufacturing uptime is a RAMS problem. RAMS360 lets reliability and maintenance teams co-author connected FMEA and RBD analyses — so design changes propagate automatically rather than triggering manual rework cycles.",
+      "Unplanned downtime starts with a failure no one traced in time. RAMS360 connects your process FMEA, reliability block diagrams, and maintenance plans — so when equipment changes, your safety and availability analysis updates with it. No rework. No version drift.",
     highlights: [
-      "Process Equipment Reliability Modeling",
-      "Production Line FMEA & RBD Analysis",
-      "Maintenance Strategy Optimization",
-      "Safety Instrumented System Analysis",
-      "Lifecycle Cost & Availability Modeling",
+      "Process equipment RBD with failure rate library (OREDA / NPRD)",
+      "Production line FMEA linked to RBD — changes propagate automatically",
+      "Maintenance task optimization by criticality, cost, and interval",
+      "SIL verification and safety instrumented system (SIS) analysis",
+      "LCC modeling with availability sensitivity and spare parts impact",
     ],
     image:
       "https://images.unsplash.com/photo-1717386255773-1e3037c81788?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxpbmR1c3RyaWFsJTIwbWFudWZhY3R1cmluZyUyMGF1dG9tYXRpb24lMjBmYWN0b3J5fGVufDF8fHx8MTc3OTE3NDIxN3ww&ixlib=rb-4.1.0&q=80&w=1080",
-    accent: "#ef4444",
+    accent: "#4682B4",
     stat: "5",
     statLabel: "Capabilities",
   },
@@ -110,16 +110,16 @@ const industries = [
     id: "electronics",
     label: "Electronics & Semiconductors",
     icon: "💡",
-    tagline: "Silicon to System",
+    tagline: "From component failure to system risk — in one model",
     heading: "RAMS Engineering for Electronics & Semiconductors",
     description:
-      "Component-level failure propagates fast. RAMS360 enables cross-linked reliability analysis from device-level FMEA to system-level FTA — with traceability built for certification audits and design revision cycles.",
+      "A single component failure can cascade to system-level risk before the next design review. RAMS360 traces failure modes from BOM-level FMEA through system FTA — giving your team full certification traceability for IEC 61508 and SIL qualification, with every design revision automatically reflected.",
     highlights: [
-      "Component-Level FMEA & Part Stress Analysis",
-      "PCB & System-Level FTA Modeling",
-      "IEC 61508 & SIL Classification Support",
-      "Reliability Growth & Test Data Integration",
-      "BOM-Level Failure Data Traceability",
+      "Component FMEA with part stress analysis and derating verification",
+      "PCB-level FTA linked to system safety model — auto-updated on revision",
+      "IEC 61508 SIL classification with diagnostic coverage calculation",
+      "Reliability growth tracking with HALT / HAST test data integration",
+      "Full BOM-to-failure traceability for certification audit readiness",
     ],
     image:
       "https://images.unsplash.com/photo-1562408590-e32931084e23?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwyfHxlbGVjdHJvbmljcyUyMHNlbWljb25kdWN0b3IlMjBtYW51ZmFjdHVyaW5nJTIwdGVjaG5vbG9neXxlbnwxfHx8fDE3NzkxNzQyMzB8MA&ixlib=rb-4.1.0&q=80&w=1080",
@@ -597,7 +597,7 @@ if (tabEl && tabsRef.current) {
                   <div className="ind-item" key={item}>
                     <span className="ind-item-dot" />
                     <span className="ind-item-text">{item}</span>
-                    <span className="ind-item-arrow">→</span>
+                    
                   </div>
                 ))}
               </div>

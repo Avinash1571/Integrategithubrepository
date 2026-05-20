@@ -5,9 +5,9 @@ import { Hero } from '../components/Hero';
 import { NewsBar } from '../components/NewsBar';
 import { Solutions } from '../components/Solutions';
 import { Standards } from '../components/Standards';
-import { Split } from '../components/Split';
 import { Features } from '../components/Features';
 import { Trust } from '../components/Trust';
+import { PlatformOverview } from '../components/PlatformOverview';
 import { CTA } from '../components/CTA';
 import { Footer } from '../components/Footer';
 import { BackToTop } from '../components/BackToTop';
@@ -20,11 +20,11 @@ export function HomePage() {
       <Header />
       <Hero />
       <NewsBar />
-      <Split />
       <Solutions />
       <Standards />
       <Features />
       <Trust />
+      <PlatformOverview />
       <CTA />
       <Footer />
       <BackToTop />
