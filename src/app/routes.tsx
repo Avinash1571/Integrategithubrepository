@@ -35,11 +35,7 @@ export const router = createBrowserRouter([
         path: 'modules/pbs',
         element: <PBSLandingPage />,
       },
-      {
-        path: 'industries',
-        element: <Demo />,
-      },
-      {
+{
         path: 'modules/frp',
         element: <FRPLandingPage />,
       },

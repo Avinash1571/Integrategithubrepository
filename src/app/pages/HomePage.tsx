@@ -3,7 +3,9 @@ import { Header } from '../components/Header';
 import { ContactFloat } from '../components/ContactFloat';
 import { Hero } from '../components/Hero';
 import { NewsBar } from '../components/NewsBar';
+import { ProblemSolve } from '../components/ProblemSolve';
 import { Solutions } from '../components/Solutions';
+import { IndustriesHome } from '../components/IndustriesHome';
 import { Standards } from '../components/Standards';
 import { Features } from '../components/Features';
 import { Trust } from '../components/Trust';
@@ -20,7 +22,9 @@ export function HomePage() {
       <Header />
       <Hero />
       <NewsBar />
+      <ProblemSolve />
       <Solutions />
+      <IndustriesHome />
       <Standards />
       <Features />
       <Trust />

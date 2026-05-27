@@ -11,7 +11,7 @@ export function NewsBar() {
 
   return (
     <>
-      <div className="bg-[var(--rams-cream)] py-4 border-b border-[var(--rams-gray-200)]">
+      <div className="py-4 border-b border-[var(--rams-gray-200)] bg-[#f9fafb]">
         <div className="max-w-[1280px] mx-auto px-10 flex items-center gap-6 flex-wrap justify-center">
           <div
             className="text-[0.85rem] text-[var(--rams-primary)] uppercase tracking-[0.06em]"

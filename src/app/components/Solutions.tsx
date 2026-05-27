@@ -196,16 +196,16 @@ export function Solutions() {
   ];
 
   return (
-    <section className="bg-[var(--rams-primary-deep)] py-20 scroll-mt-[80px] ]" id="modules">
+    <section className="bg-white py-20 scroll-mt-[80px]" id="modules">
       <div className="max-w-[1280px] mx-auto px-10">
-         <div className="w-1/2 mx-auto h-[1px] bg-gray-100/10 mb-6"></div>
+        <div className="w-1/2 mx-auto h-[1px] bg-gray-200 mb-8"></div>
         <h2
-          className="text-[clamp(2rem,4vw,3rem)] text-white text-center uppercase tracking-[0.06em] mb-4 animate-fade-in-up"
-          style={{ fontFamily: 'var(--ff-head)', fontWeight: 700 }}
+          className="text-[clamp(2rem,4vw,3rem)] text-[#1a1a2e] text-center uppercase tracking-[0.06em] mb-4 animate-fade-in-up"
+          style={{ fontFamily: 'var(--ff-head)', fontWeight: 800 }}
         >
-           Connected Analysis Modules
+          Connected Analysis Modules
         </h2>
-        <p className="text-center text-white/55 text-[0.95rem] max-w-[720px] mx-auto mb-14 leading-[1.7] animate-fade-in-up">
+        <p className="text-center text-[#4a4a6a] text-[0.95rem] max-w-[720px] mx-auto mb-14 leading-[1.7] animate-fade-in-up">
           Every module is linked. PBS forms the base. Failure rates feed FMECA. FMECA drives maintenance.
           RAMS360 connects PBS, Failure Prediction, MTTR, FMECA, Maintenance, Spare Parts, Safety, FTA, RBD, and Reports into one unified reliability ecosystem.
         </p>
@@ -215,39 +215,39 @@ export function Solutions() {
             const content = (
               <>
                 {/* Number Badge */}
-                <div className="absolute top-6 right-6 text-white/20 text-sm font-bold z-10">
+                <div className="absolute top-5 right-5 text-gray-300 text-sm font-bold z-10">
                   {String(index + 1).padStart(2, '0')}
                 </div>
 
                 {/* Icon */}
                 <div
-                  className="w-[100px] h-[100px] rounded-xl flex items-center justify-center mb-6 mx-auto"
+                  className="w-[90px] h-[90px] rounded-xl flex items-center justify-center mb-5 mx-auto"
                   style={{
-                    background: `linear-gradient(135deg, ${module.color}33, ${module.color}22)`,
+                    background: `linear-gradient(135deg, ${module.color}22, ${module.color}14)`,
                   }}
                 >
-                  <div style={{ color: module.color }} className="w-[100px] h-[100px] flex items-center justify-center">
+                  <div style={{ color: module.color }} className="w-[90px] h-[90px] flex items-center justify-center">
                     {module.icon}
                   </div>
                 </div>
 
                 {/* Title */}
                 <h3
-                  className="text-white text-[1.1rem] mb-3 leading-tight text-center"
+                  className="text-[#1a1a2e] text-[1rem] mb-3 leading-tight text-center"
                   style={{ fontFamily: 'var(--ff-head)', fontWeight: 700 }}
                 >
                   {module.label.replace('\n', ' ')}
                 </h3>
 
                 {/* Description */}
-                <p className="text-white/50 text-[0.85rem] leading-relaxed text-center mb-6 flex-grow">
+                <p className="text-[#6b7280] text-[0.82rem] leading-relaxed text-center mb-6 flex-grow">
                   {module.description}
                 </p>
 
                 {/* Arrow Button */}
                 <div className="flex justify-center mt-auto">
-                  <div className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center transition-all duration-300 hover:border-white/40 hover:bg-white/5">
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" className="text-white/60">
+                  <div className="w-9 h-9 rounded-full border border-gray-300 flex items-center justify-center transition-all duration-300 hover:border-gray-400 hover:bg-gray-50">
+                    <svg width="14" height="14" viewBox="0 0 16 16" fill="none" className="text-gray-400">
                       <path d="M6 3L11 8L6 13" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                     </svg>
                   </div>
@@ -256,7 +256,7 @@ export function Solutions() {
             );
 
             const commonProps = {
-              className: "relative cursor-pointer transition-all duration-300 hover:-translate-y-2 block p-8 rounded-2xl border border-white/10 bg-white/[0.02] backdrop-blur-sm hover:border-white/20 hover:bg-white/[0.05] min-h-[320px] flex flex-col",
+              className: "relative cursor-pointer transition-all duration-300 hover:-translate-y-2 block p-7 rounded-2xl border border-gray-200 bg-white shadow-sm hover:shadow-md hover:border-gray-300 min-h-[300px] flex flex-col",
               onMouseEnter: () => setHoveredModule(module.id),
               onMouseLeave: () => setHoveredModule(null),
             };

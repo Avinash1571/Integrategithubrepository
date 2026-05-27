@@ -11,7 +11,7 @@ export function Trust() {
   ];
 
   return (
-    <section className="bg-[var(--rams-gray-100)] py-12" id="beta">
+    <section className="bg-[#F9FAFB] py-12" id="beta">
       <div className="max-w-[1280px] mx-auto px-10">
         <h2
           className="text-[1rem] text-[var(--rams-primary)] text-center mb-6 uppercase tracking-[0.06em] animate-fade-in-up"

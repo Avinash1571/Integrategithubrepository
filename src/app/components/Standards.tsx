@@ -63,7 +63,7 @@ export function Standards() {
   ];
 
   return (
-    <section className="bg-[var(--rams-gray-100)] py-20" id="standards">
+    <section className="bg-[#F9FAFB] py-20" id="standards">
       <div className="max-w-[1280px] mx-auto px-10">
         <h2
           className="text-[clamp(2rem,4vw,3rem)] text-[var(--rams-primary)] text-center uppercase tracking-[0.06em] mb-4 animate-fade-in-up"

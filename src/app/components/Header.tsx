@@ -1,7 +1,6 @@
 
 import { useEffect, useState } from 'react';
 import logoImage from '../../assets/logo.png';
-import mainLogo from '../../assets/mainlogo.png';
 
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
@@ -30,7 +29,7 @@ export function Header() {
         {/* LOGO */}
         <a href="#" className="flex items-center">
           <img
-            src={scrolled ? logoImage : mainLogo}
+            src={logoImage}
             alt="RAMS360 Logo"
             className="h-[42px] w-auto"
           />
@@ -44,7 +43,7 @@ export function Header() {
           {/* TOP LINE */}
           <span
             className={`absolute h-[2px] w-6 transition-all duration-300 ease-in-out
-              ${scrolled ? 'bg-black' : 'bg-white'}
+              bg-black
               ${menuOpen ? 'rotate-45 top-1/2' : '-translate-y-2'}
               group-hover:scale-110`}
           />
@@ -52,7 +51,7 @@ export function Header() {
           {/* MIDDLE LINE */}
           <span
             className={`absolute h-[2px] w-6 transition-all duration-300 ease-in-out
-              ${scrolled ? 'bg-black' : 'bg-white'}
+              bg-black
               ${menuOpen ? 'opacity-0' : ''}
               group-hover:scale-110`}
           />
@@ -60,7 +59,7 @@ export function Header() {
           {/* BOTTOM LINE */}
           <span
             className={`absolute h-[2px] w-6 transition-all duration-300 ease-in-out
-              ${scrolled ? 'bg-black' : 'bg-white'}
+              bg-black
               ${menuOpen ? '-rotate-45 top-1/2' : 'translate-y-2'}
               group-hover:scale-110`}
           />
@@ -72,13 +71,13 @@ export function Header() {
             {menuItems.map((id) => (
               <li key={id}>
                 <a
-                  href={id === 'industries' ? '/industries' : `#${id}`}
+                  href={`#${id}`}
                   className={`block px-4 py-2 text-[0.78rem] tracking-[0.06em] uppercase transition-colors relative
                     after:content-[''] after:absolute after:bottom-0 after:left-4 after:right-4
                     after:h-[2px] after:bg-[var(--rams-accent)] after:scale-x-0
                     after:transition-transform after:origin-left hover:after:scale-x-100
                     hover:text-[var(--rams-accent)]
-                    ${scrolled ? 'text-[var(--rams-gray-600)]' : 'text-white'}`}
+                    text-[var(--rams-gray-700)]`}
                   style={{ fontFamily: 'var(--ff-head)', fontWeight: 700 }}
                 >
                   {id === 'why'
@@ -100,7 +99,7 @@ export function Header() {
             {menuItems.map((id) => (
               <li key={id}>
                 <a
-                  href={id === 'industries' ? '/industries' : `#${id}`}
+                  href={`#${id}`}
                   onClick={() => setMenuOpen(false)}
                   className="block py-3 text-sm uppercase text-gray-700 hover:text-[var(--rams-accent)]"
                   style={{ fontFamily: 'var(--ff-head)', fontWeight: 700 }}
