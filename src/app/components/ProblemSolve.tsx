@@ -21,7 +21,7 @@ export function ProblemSolve() {
                 className="text-[clamp(1.1rem,2vw,1.4rem)] leading-[1.55] text-[#1a1a2e] italic"
                 style={{ fontFamily: 'var(--ff-head)', fontWeight: 600 }}
               >
-                "I've watched reliability engineers re-enter the same failure rate into three different tools — every single project cycle."
+                "I've watched reliability engineers re-enter the same failure rate into three different tools - every single project cycle."
               </p>
             </blockquote>
             <div

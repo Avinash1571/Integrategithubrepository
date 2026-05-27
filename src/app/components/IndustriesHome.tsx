@@ -266,7 +266,7 @@ export function IndustriesHome() {
                   >
                     {item}
                   </span>
-                  <span className="text-gray-300 text-sm group-hover:translate-x-1 group-hover:text-gray-400 transition-all">→</span>
+                  {/* <span className="text-gray-300 text-sm group-hover:translate-x-1 group-hover:text-gray-400 transition-all">→</span> */}
                 </div>
               ))}
             </div>
