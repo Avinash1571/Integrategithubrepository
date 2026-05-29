@@ -1,4 +1,10 @@
 import { useState, useRef, useEffect } from 'react';
+import { AerospaceIllustration } from './illustrations/AerospaceIllustration';
+import { AutomotiveIllustration } from './illustrations/AutomotiveIllustration';
+import { RailwaysIllustration } from './illustrations/RailwaysIllustration';
+import { EnergyIllustration } from './illustrations/EnergyIllustration';
+import { ManufacturingIllustration } from './illustrations/ManufacturingIllustration';
+import { ElectronicsIllustration } from './illustrations/ElectronicsIllustration';
 
 const industries = [
   {
@@ -16,7 +22,7 @@ const industries = [
       'Radar & sonar safety models with linked FTA and severity classification',
       'Criticality ranking for defense networks — MIL-STD-882 aligned',
     ],
-    image: 'https://images.unsplash.com/photo-1540575861501-7cf05a4b125a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxhZXJvc3BhY2UlMjBhaXJjcmFmdCUyMHJlbGlhYmlsaXR5JTIwZW5naW5lZXJpbmd8ZW58MXx8fHwxNzc5MTc0MjE0fDA&ixlib=rb-4.1.0&q=80&w=1080',
+    illustration: <AerospaceIllustration />,
     accent: '#E8722A',
   },
   {
@@ -34,7 +40,7 @@ const industries = [
       'EV battery FMEA with thermal runaway and cell-level failure tracking',
       'Supplier failure data integration for end-to-end lifecycle traceability',
     ],
-    image: 'https://images.unsplash.com/photo-1567789884554-0b844b597180?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxhdXRvbW90aXZlJTIwdmVoaWNsZSUyMG1hbnVmYWN0dXJpbmclMjBzYWZldHl8ZW58MXx8fHwxNzc5MTc0MjE1fDA&ixlib=rb-4.1.0&q=80&w=1080',
+    illustration: <AutomotiveIllustration />,
     accent: '#f59e0b',
   },
   {
@@ -52,7 +58,7 @@ const industries = [
       'Preventive vs. predictive maintenance strategy optimizer',
       'Fleet-level availability dashboard with live MTBF and MTTR tracking',
     ],
-    image: 'https://images.unsplash.com/photo-1580442374555-3def8fb41738?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxyYWlsd2F5JTIwdHJhaW4lMjB0cmFuc3BvcnRhdGlvbiUyMGluZnJhc3RydWN0dXJlfGVufDF8fHx8MTc3OTE3NDIxNnww&ixlib=rb-4.1.0&q=80&w=1080',
+    illustration: <RailwaysIllustration />,
     accent: '#10b981',
   },
   {
@@ -70,7 +76,7 @@ const industries = [
       'Condition-based and predictive maintenance planning integration',
       'IEC 61511 / IEC 61508 safety lifecycle traceability and audit trail',
     ],
-    image: 'https://images.unsplash.com/photo-1497435334941-8c899ee9e8e9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxlbmVyZ3klMjBwb3dlciUyMGdyaWQlMjByZW5ld2FibGUlMjBpbmZyYXN0cnVjdHVyZXxlbnwxfHx8fDE3NzkxNzQyMTZ8MA&ixlib=rb-4.1.0&q=80&w=1080',
+    illustration: <EnergyIllustration />,
     accent: '#8b5cf6',
   },
   {
@@ -88,7 +94,7 @@ const industries = [
       'SIL verification and safety instrumented system (SIS) analysis',
       'LCC modeling with availability sensitivity and spare parts impact',
     ],
-    image: 'https://images.unsplash.com/photo-1717386255773-1e3037c81788?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxpbmR1c3RyaWFsJTIwbWFudWZhY3R1cmluZyUyMGF1dG9tYXRpb24lMjBmYWN0b3J5fGVufDF8fHx8MTc3OTE3NDIxN3ww&ixlib=rb-4.1.0&q=80&w=1080',
+    illustration: <ManufacturingIllustration />,
     accent: '#4682B4',
   },
   {
@@ -106,7 +112,7 @@ const industries = [
       'Reliability growth tracking with HALT / HAST test data integration',
       'Full BOM-to-failure traceability for certification audit readiness',
     ],
-    image: 'https://images.unsplash.com/photo-1562408590-e32931084e23?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwyfHxlbGVjdHJvbmljcyUyMHNlbWljb25kdWN0b3IlMjBtYW51ZmFjdHVyaW5nJTIwdGVjaG5vbG9neXxlbnwxfHx8fDE3NzkxNzQyMzB8MA&ixlib=rb-4.1.0&q=80&w=1080',
+    illustration: <ElectronicsIllustration />,
     accent: '#06b6d4',
   },
 ];
@@ -157,37 +163,38 @@ export function IndustriesHome() {
       <div className="max-w-[1280px] mx-auto px-10">
 
         {/* Header */}
-        <div className="flex items-end justify-between gap-6 flex-wrap mb-12">
+        <div className=" gap-6 flex-wrap mb-6">
           <div>
-            <div className="flex items-center gap-2 mb-3">
+            <div className="gap-2 mb-3 text-center">
               {/* <span className="w-7 h-[2px] bg-[var(--rams-accent)] rounded" /> */}
               <span
-                className="text-[0.68rem] uppercase tracking-[0.16em] text-[var(--rams-accent)]"
+                className="text-[0.68rem] uppercase tracking-[0.16em] text-[var(--rams-accent)] text-center"
                 style={{ fontFamily: 'var(--ff-head)', fontWeight: 700 }}
               >
                 What We Serve
               </span>
             </div>
             <h2
-              className="text-[clamp(1.8rem,4vw,3rem)] text-[#1a1a2e] uppercase tracking-[0.04em] leading-[1.1]"
+              className="text-[clamp(1.8rem,4vw,3rem)] text-[#1a1a2e] uppercase tracking-[0.04em] leading-[1.1] text-center text-[32px]"
               style={{ fontFamily: 'var(--ff-head)', fontWeight: 800 }}
             >
               Industries We{' '}
-              <span className="text-[var(--rams-accent)]">Transform</span>
+              <span className="text-[#1a1a2e]">Transform</span>
             </h2>
           </div>
-          <p
-            className="text-[0.9rem] text-[#6b7280] max-w-[260px] text-right leading-[1.7]"
+         
+        </div>
+         <p
+            className="text-[0.9rem] text-[#6b7280] leading-[1.7] text-center text-[17px]"
             style={{ fontFamily: 'var(--ff-body)' }}
           >
             Deep domain expertise across every critical sector — from silicon to systems, embedded to enterprise.
           </p>
-        </div>
 
         {/* Tabs */}
         <div
           ref={tabsRef}
-          className="flex gap-0 border-b border-gray-200 mb-12 overflow-x-auto"
+          className="flex gap-0 border-b border-gray-200 mb-12 mt-5 overflow-x-auto"
           style={{ scrollbarWidth: 'none' }}
         >
           {industries.map((ind, i) => (
@@ -243,7 +250,7 @@ export function IndustriesHome() {
 
             {/* Description */}
             <p
-              className="text-[0.93rem] text-[#4a4a6a] leading-[1.8]"
+              className="text-[0.93rem] text-[#4a4a6a] leading-[1.8] text-[15px]"
               style={{ fontFamily: 'var(--ff-body)' }}
             >
               {current.description}
@@ -261,7 +268,7 @@ export function IndustriesHome() {
                     style={{ background: current.accent }}
                   />
                   <span
-                    className="text-[0.83rem] text-[#374151] leading-[1.5] flex-1"
+                    className="text-[0.83rem] text-[#374151] leading-[1.5] flex-1 text-[15px]"
                     style={{ fontFamily: 'var(--ff-body)', fontWeight: 500 }}
                   >
                     {item}
@@ -272,23 +279,15 @@ export function IndustriesHome() {
             </div>
           </div>
 
-          {/* Right — image */}
+          {/* Right — illustration */}
           <div className="relative">
             <div
-              className="relative rounded-2xl overflow-hidden shadow-[0_20px_60px_rgba(0,0,0,0.12)]"
+              className="relative rounded-2xl overflow-hidden shadow-[0_20px_60px_rgba(0,0,0,0.12)] bg-white"
               style={{ aspectRatio: '4/3' }}
             >
-              <img
-                src={current.image}
-                alt={current.label}
-                className="w-full h-full object-cover transition-transform duration-700 hover:scale-[1.04]"
-                style={{ filter: 'brightness(0.92) saturate(1.1)' }}
-              />
-              {/* Subtle overlay */}
-              <div
-                className="absolute inset-0"
-                style={{ background: 'linear-gradient(160deg, rgba(255,255,255,0.04) 0%, transparent 50%, rgba(0,0,0,0.18) 100%)' }}
-              />
+              <div className="w-full h-full">
+                {current.illustration}
+              </div>
               {/* Accent bar */}
               <div
                 className="absolute bottom-0 left-0 right-0 h-[3px]"
@@ -307,7 +306,7 @@ export function IndustriesHome() {
             </div>
 
             {/* Float card */}
-            <div className="absolute -bottom-5 -right-4 bg-white border border-gray-200 rounded-xl shadow-[0_8px_32px_rgba(0,0,0,0.1)] px-5 py-4 flex flex-col gap-1 min-w-[120px]">
+            {/* <div className="absolute -bottom-5 -right-4 bg-white border border-gray-200 rounded-xl shadow-[0_8px_32px_rgba(0,0,0,0.1)] px-5 py-4 flex flex-col gap-1 min-w-[120px]">
               <span
                 className="text-[1.9rem] leading-none"
                 style={{ fontFamily: 'var(--ff-head)', fontWeight: 800, color: current.accent }}
@@ -320,7 +319,7 @@ export function IndustriesHome() {
               >
                 Capabilities
               </span>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

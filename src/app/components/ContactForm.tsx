@@ -1,15 +1,39 @@
 import React, { useState } from "react";
 
-const ENQUIRY_TYPES = ["Beta Access", "Demo", "Partnership"];
+const ROLE_OPTIONS = [
+  "Select your role",
+  "RAMS Engineer",
+  "Reliability Engineer",
+  "Safety Engineer",
+  "Systems Engineer",
+  "Project Manager",
+  "Academic / Researcher",
+  "Student",
+  "Consultant",
+  "Other"
+];
+
+const INDUSTRY_OPTIONS = [
+  "Select your industry",
+  "Aerospace & Defence",
+  "Automotive",
+  "Railways",
+  "Energy & Utilities",
+  "Manufacturing",
+  "Electronics",
+  "Medical Devices",
+  "Marine",
+  "Academic / Research",
+  "Other"
+];
 
 interface FormData {
   fullName: string;
   workEmail: string;
-  phone: string;
   company: string;
   role: string;
+  industry: string;
   country: string;
-  enquiryType: string;
   message: string;
   consent: boolean;
 }
@@ -17,11 +41,10 @@ interface FormData {
 const EMPTY_FORM: FormData = {
   fullName: "",
   workEmail: "",
-  phone: "",
   company: "",
-  role: "",
+  role: ROLE_OPTIONS[0],
+  industry: INDUSTRY_OPTIONS[0],
   country: "",
-  enquiryType: "Beta Access",
   message: "",
   consent: false,
 };
@@ -48,12 +71,10 @@ export function ContactFormModal({ open, onOpenChange }: { open: boolean; onOpen
     if (!formData.fullName) e.fullName = "Full name is required";
     if (!formData.workEmail) e.workEmail = "Email is required";
     else if (!/\S+@\S+\.\S+/.test(formData.workEmail)) e.workEmail = "Invalid email";
-    if (!formData.phone) e.phone = "Phone number is required";
-    else if (!/^[0-9]{10}$/.test(formData.phone)) e.phone = "Enter valid 10-digit phone number";
-    if (!formData.company) e.company = "Company is required";
-    if (!formData.role) e.role = "Role is required";
-    if (!formData.country) e.country = "Country is required";
-    if (!formData.message) e.message = "Message is required";
+    if (!formData.company) e.company = "Organisation is required";
+    if (!formData.role || formData.role === ROLE_OPTIONS[0]) e.role = "Please select your role";
+    if (!formData.industry || formData.industry === INDUSTRY_OPTIONS[0]) e.industry = "Please select your industry";
+    if (!formData.message) e.message = "Please tell us about your current RAMS workflow";
     if (!formData.consent) e.consent = "Consent is required";
     setErrors(e);
     return Object.keys(e).length === 0;
@@ -104,7 +125,7 @@ export function ContactFormModal({ open, onOpenChange }: { open: boolean; onOpen
           flex-direction: row;
           width: 100%;
           max-width: 960px;
-          height: calc(100vh - 120px);
+          height: calc(100vh - 80px);
           max-height: 720px;
           min-height: 480px;
           border-radius: 18px;
@@ -320,6 +341,17 @@ export function ContactFormModal({ open, onOpenChange }: { open: boolean; onOpen
 
         select.rfm-input { cursor: pointer; }
 
+        /* Label */
+        .rfm-label {
+          font-size: 0.7rem;
+          font-weight: 600;
+          color: #6b7280;
+          text-transform: uppercase;
+          letter-spacing: 0.05em;
+          margin-bottom: 6px;
+          display: block;
+        }
+
         /* Consent */
         .rfm-consent {
           display: flex;
@@ -356,6 +388,27 @@ export function ContactFormModal({ open, onOpenChange }: { open: boolean; onOpen
         }
         .rfm-submit:hover:not(:disabled) { background: #ea6c0a; }
         .rfm-submit:disabled { opacity: 0.6; cursor: not-allowed; }
+
+        /* Footer Benefits */
+        .rfm-footer-benefits {
+          display: flex;
+          justify-content: center;
+          gap: 20px;
+          margin-top: 12px;
+          font-size: 0.75rem;
+          color: #6b7280;
+        }
+        .rfm-footer-benefits span {
+          display: inline-flex;
+          align-items: center;
+        }
+        .rfm-footer-benefits-bottom {
+          display: flex;
+          justify-content: center;
+          margin-top: 6px;
+          font-size: 0.75rem;
+          color: #6b7280;
+        }
 
         /* Popup */
         .rfm-popup-bg {
@@ -582,7 +635,7 @@ export function ContactFormModal({ open, onOpenChange }: { open: boolean; onOpen
         /* ── SMALL TABLET 601px – 767px ── */
         @media (min-width: 601px) and (max-width: 767px) {
           .rfm-modal {
-            height: calc(100vh - 100px);
+            height: calc(100vh - 80px);
           }
 
           .rfm-left {
@@ -608,15 +661,18 @@ export function ContactFormModal({ open, onOpenChange }: { open: boolean; onOpen
           {/* LEFT */}
           <div className="rfm-left">
             <div>
-              <h2>Get in touch with Endyra RAMS360</h2>
+              <div className="rfm-beta-label" style={{ color: 'var(--rams-accent)', fontSize: '0.75rem', fontWeight: 700, letterSpacing: '0.1em', marginBottom: '1rem' }}>
+                 CLOSED BETA PROGRAM
+              </div>
+              <h2>Join the engineers <span style={{ color: 'var(--rams-accent)' }}>defining digital RAMS.</span></h2>
               <p className="rfm-left-sub">
-                Share your use case and interest. We will review your request and get back to you with next steps.
+                RAMS360 is accepting a select cohort of practitioners, researchers, and faculty. Every submission is reviewed by the team. Your access pricing is locked in permanently from day one.
               </p>
               <div className="rfm-steps">
                 {[
-                  { title: "Beta access",     desc: "For engineering teams, researchers, and practitioners." },
-                  { title: "Direct response", desc: "Responses are routed to your team mailbox immediately." },
-                  { title: "Zoho-ready",      desc: "Connect this to Zoho Forms or your own endpoint later." },
+                  { title: "All 10 modules — free", desc: "Full platform access during beta. PBS, FRP, FMECA, MTTR, Safety, FTA, RBD, Spares, LCC, Reports — everything." },
+                  { title: "Direct team access", desc: "Every submission is read by the engineers who built RAMS360. No sales queue. No automated reply. A real response." },
+                  { title: "Shape the roadmap", desc: "Beta users have a real voice in what gets built next. Bug reports get fixed. Feature requests get considered." },
                 ].map((s, i) => (
                   <div className="rfm-step" key={i}>
                     <div className="rfm-step-num">{i + 1}</div>
@@ -629,7 +685,8 @@ export function ContactFormModal({ open, onOpenChange }: { open: boolean; onOpen
               </div>
             </div>
             <p className="rfm-left-footer">
-              Current default delivery: email fallback. Configure endpoint later.
+              Limited cohort · Rolling review · No payment required<br />
+              Early adopter pricing locked from first access date
             </p>
           </div>
 
@@ -638,7 +695,7 @@ export function ContactFormModal({ open, onOpenChange }: { open: boolean; onOpen
 
             <div className="rfm-right-header">
               <h3>Request Beta Access</h3>
-              <p>Fill in the details below. Required fields are kept minimal.</p>
+              <p>A short form. A real person reads every submission and responds within 48 hours.</p>
             </div>
 
             <button className="rfm-close" onClick={() => onOpenChange(false)} aria-label="Close">✕</button>
@@ -647,87 +704,84 @@ export function ContactFormModal({ open, onOpenChange }: { open: boolean; onOpen
 
               <div className="rfm-row rfm-row-gap">
                 <Field error={errors.fullName}>
+                  <label className="rfm-label">FULL NAME <span style={{ color: 'var(--rams-accent)' }}>*</span></label>
                   <input
                     name="fullName"
                     value={formData.fullName}
                     onChange={handleChange}
                     className={`rfm-input${errors.fullName ? " err" : ""}`}
-                    placeholder="Full Name"
+                    placeholder="Your full name"
                   />
                 </Field>
                 <Field error={errors.workEmail}>
+                  <label className="rfm-label">WORK OR ACADEMIC EMAIL <span style={{ color: 'var(--rams-accent)' }}>*</span></label>
                   <input
                     name="workEmail"
                     value={formData.workEmail}
                     onChange={handleChange}
                     className={`rfm-input${errors.workEmail ? " err" : ""}`}
-                    placeholder="Work Email"
+                    placeholder="you@organisation.com"
                   />
                 </Field>
               </div>
 
               <div className="rfm-row rfm-row-gap">
-                <Field error={errors.phone}>
-                  <input
-                    name="phone"
-                    value={formData.phone}
-                    onChange={handleChange}
-                    className={`rfm-input${errors.phone ? " err" : ""}`}
-                    placeholder="Phone Number"
-                    maxLength={10}
-                  />
-                </Field>
                 <Field error={errors.company}>
+                  <label className="rfm-label">ORGANISATION <span style={{ color: 'var(--rams-accent)' }}>*</span></label>
                   <input
                     name="company"
                     value={formData.company}
                     onChange={handleChange}
                     className={`rfm-input${errors.company ? " err" : ""}`}
-                    placeholder="Company / Institution"
+                    placeholder="Company or university"
                   />
                 </Field>
-              </div>
-
-              <div className="rfm-row rfm-row-gap">
                 <Field error={errors.role}>
-                  <input
+                  <label className="rfm-label">YOUR ROLE <span style={{ color: 'var(--rams-accent)' }}>*</span></label>
+                  <select
                     name="role"
                     value={formData.role}
                     onChange={handleChange}
                     className={`rfm-input${errors.role ? " err" : ""}`}
-                    placeholder="Role"
-                  />
+                  >
+                    {ROLE_OPTIONS.map((t) => <option key={t}>{t}</option>)}
+                  </select>
+                </Field>
+              </div>
+
+              <div className="rfm-row rfm-row-gap">
+                <Field error={errors.industry}>
+                  <label className="rfm-label">INDUSTRY <span style={{ color: 'var(--rams-accent)' }}>*</span></label>
+                  <select
+                    name="industry"
+                    value={formData.industry}
+                    onChange={handleChange}
+                    className={`rfm-input${errors.industry ? " err" : ""}`}
+                  >
+                    {INDUSTRY_OPTIONS.map((t) => <option key={t}>{t}</option>)}
+                  </select>
                 </Field>
                 <Field error={errors.country}>
+                  <label className="rfm-label">COUNTRY</label>
                   <input
                     name="country"
                     value={formData.country}
                     onChange={handleChange}
                     className={`rfm-input${errors.country ? " err" : ""}`}
-                    placeholder="Country"
+                    placeholder="Your country"
                   />
                 </Field>
               </div>
 
               <div className="rfm-field rfm-row-gap">
-                <select
-                  name="enquiryType"
-                  value={formData.enquiryType}
-                  onChange={handleChange}
-                  className="rfm-input"
-                >
-                  {ENQUIRY_TYPES.map((t) => <option key={t}>{t}</option>)}
-                </select>
-                <div className="rfm-err" />
-              </div>
-
-              <div className="rfm-field rfm-row-gap">
+                <label className="rfm-label">TELL US ABOUT YOUR CURRENT RAMS WORKFLOW <span style={{ color: 'var(--rams-accent)' }}>*</span></label>
                 <textarea
                   name="message"
                   value={formData.message}
                   onChange={handleChange}
                   className={`rfm-input${errors.message ? " err" : ""}`}
-                  placeholder="Tell us what you want to evaluate, build, or discuss."
+                  placeholder="What tools are you using today? What's the biggest friction point? What would you want to test in RAMS360?"
+                  rows={4}
                 />
                 <div className="rfm-err">{errors.message ?? ""}</div>
               </div>
@@ -758,8 +812,16 @@ export function ContactFormModal({ open, onOpenChange }: { open: boolean; onOpen
                 onClick={handleSubmit}
                 disabled={loading}
               >
-                {loading ? "Sending..." : "SEND INQUIRY"}
+                {loading ? "Sending..." : "SEND BETA ACCESS REQUEST →"}
               </button>
+              <div className="rfm-footer-benefits">
+                <span>✓ Free during beta</span>
+                <span>✓ No credit card</span>
+                <span>✓ Direct team contact</span>
+              </div>
+              <div className="rfm-footer-benefits-bottom">
+                <span>✓ Pricing locked on approval</span>
+              </div>
             </div>
 
           </div>

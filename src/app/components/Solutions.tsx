@@ -198,14 +198,23 @@ export function Solutions() {
   return (
     <section className="bg-white py-20 scroll-mt-[80px]" id="modules">
       <div className="max-w-[1280px] mx-auto px-10">
-        <div className="w-1/2 mx-auto h-[1px] bg-gray-200 mb-8"></div>
+        {/* Section label */}
+        <div className="text-center mb-6">
+          <span
+            className="inline-block text-[0.75rem] uppercase tracking-[0.16em] text-[var(--rams-accent)]"
+            style={{ fontFamily: 'var(--ff-head)', fontWeight: 700 }}
+          >
+            CONNECTED ANALYSIS MODULES
+          </span>
+        </div>
+
         <h2
-          className="text-[clamp(2rem,4vw,3rem)] text-[#1a1a2e] text-center uppercase tracking-[0.06em] mb-4 animate-fade-in-up"
-          style={{ fontFamily: 'var(--ff-head)', fontWeight: 800 }}
+          className="uppercase text-[32px] text-[#1a1a2e] text-center mb-6 animate-fade-in-up"
+          style={{ fontFamily: 'var(--ff-head)', fontWeight: 800, lineHeight: 1.2 }}
         >
-          Connected Analysis Modules
+          Ten modules. One living ecosystem.
         </h2>
-        <p className="text-center text-[#4a4a6a] text-[0.95rem] max-w-[720px] mx-auto mb-14 leading-[1.7] animate-fade-in-up">
+        <p className="text-center text-[#6b5b8a] text-[1.05rem] max-w-[820px] mx-auto mb-12 leading-[1.7] animate-fade-in-up">
           Every module is linked. PBS forms the base. Failure rates feed FMECA. FMECA drives maintenance.
           RAMS360 connects PBS, Failure Prediction, MTTR, FMECA, Maintenance, Spare Parts, Safety, FTA, RBD, and Reports into one unified reliability ecosystem.
         </p>

@@ -4,6 +4,7 @@ import { ContactFloat } from '../components/ContactFloat';
 import { Hero } from '../components/Hero';
 import { NewsBar } from '../components/NewsBar';
 import { ProblemSolve } from '../components/ProblemSolve';
+import { OneSourceOfTruth } from '../components/OneSourceOfTruth';
 import { Solutions } from '../components/Solutions';
 import { IndustriesHome } from '../components/IndustriesHome';
 import { Standards } from '../components/Standards';
@@ -23,13 +24,14 @@ export function HomePage() {
       <Hero />
       <NewsBar />
       <ProblemSolve />
+      <OneSourceOfTruth />
       <Solutions />
       <IndustriesHome />
       <Standards />
       <Features />
       <Trust />
       <PlatformOverview />
-      <CTA />
+      {/* <CTA /> */}
       <Footer />
       <BackToTop />
     </div>

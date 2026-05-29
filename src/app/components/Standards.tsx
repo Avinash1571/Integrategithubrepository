@@ -65,16 +65,26 @@ export function Standards() {
   return (
     <section className="bg-[#F9FAFB] py-20" id="standards">
       <div className="max-w-[1280px] mx-auto px-10">
+        {/* Section label */}
+        <div className="text-center mb-6">
+          <span
+            className="inline-block text-[0.75rem] uppercase tracking-[0.16em] text-[var(--rams-accent)]"
+            style={{ fontFamily: 'var(--ff-head)', fontWeight: 700 }}
+          >
+            STANDARDS IMPLEMENTED
+          </span>
+        </div>
+
         <h2
-          className="text-[clamp(2rem,4vw,3rem)] text-[var(--rams-primary)] text-center uppercase tracking-[0.06em] mb-4 animate-fade-in-up"
-          style={{ fontFamily: 'var(--ff-head)', fontWeight: 700 }}
+          className="text-[32px] text-[var(--rams-primary)] text-center mb-6 animate-fade-in-up"
+          style={{ fontFamily: 'var(--ff-head)', fontWeight: 800, lineHeight: 1.2 }}
         >
-          Standards in Our Product
+          MIL-GRADE RIGOR.<br />
+          DELIVERED IN A BROWSER.
         </h2>
 
-        <p className="text-center text-[var(--rams-gray-600)] text-[0.95rem] max-w-[720px] mx-auto mb-14 leading-[1.7] animate-fade-in-up">
-          RAMS360 leverages proven industry standards to deliver accurate reliability predictions and
-          failure rate analysis for both electronic and non-electronic systems.
+        <p className="text-center text-[#6b5b8a] text-[1.05rem] max-w-[820px] mx-auto mb-14 leading-[1.7] animate-fade-in-up">
+          The standards your customers, certifiers, and programme managers expect haven't changed. The way you access them has. RAMS360 implements full calculation models — not summaries, not approximations.
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 animate-fade-in-up">

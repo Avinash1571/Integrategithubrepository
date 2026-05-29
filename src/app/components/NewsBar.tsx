@@ -1,40 +1,84 @@
+import { useState, useEffect, useRef } from 'react';
 
+const stats = [
+  { target: 10, label: 'Integrated Modules' },
+  { target: 6,  label: 'Mil-Grade Standards' },
+  { target: 6,  label: 'Industry Verticals' },
+  { target: 0,  label: 'Installs Required' },
+];
 
-// =========================
-// NewsBar.tsx
-// =========================
-import React, { useState } from "react";
-import { ContactFormModal } from "./ContactForm";
+function CountUp({ target, delay, started }: { target: number; delay: number; started: boolean }) {
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    if (!started) return;
+    if (target === 0) return;
+
+    const timeout = setTimeout(() => {
+      const duration = 600;
+      let startTime: number | null = null;
+
+      const animate = (ts: number) => {
+        if (!startTime) startTime = ts;
+        const progress = Math.min((ts - startTime) / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        setCount(Math.floor(eased * target));
+        if (progress < 1) requestAnimationFrame(animate);
+        else setCount(target);
+      };
+
+      const raf = requestAnimationFrame(animate);
+      return () => cancelAnimationFrame(raf);
+    }, delay);
+
+    return () => clearTimeout(timeout);
+  }, [started, target, delay]);
+
+  return <>{String(count).padStart(2, '0')}</>;
+}
 
 export function NewsBar() {
-  const [open, setOpen] = useState(false);
+  const [started, setStarted] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) { setStarted(true); observer.disconnect(); } },
+      { threshold: 0.4 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
 
   return (
-    <>
-      <div className="py-4 border-b border-[var(--rams-gray-200)] bg-[#f9fafb]">
-        <div className="max-w-[1280px] mx-auto px-10 flex items-center gap-6 flex-wrap justify-center">
-          <div
-            className="text-[0.85rem] text-[var(--rams-primary)] uppercase tracking-[0.06em]"
-            style={{ fontFamily: "var(--ff-head)", fontWeight: 700 }}
-          >
-            Closed Beta Program
-          </div>
+    <div ref={ref} className="bg-[#F9FAFB] border-y border-[var(--rams-gray-200)]">
+      <div className="max-w-[1280px] mx-auto px-10 py-6">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-0">
+          {stats.map((stat, index) => (
+            <div key={index} className="flex flex-col items-center relative">
+              {index > 0 && (
+                <div className="hidden md:block absolute left-0 top-1/2 -translate-y-1/2 h-8 w-px bg-[var(--rams-gray-200)]" />
+              )}
 
-          <div className="text-[0.88rem] text-[var(--rams-gray-600)]">
-            Now accepting RAMS practitioners, researchers & engineering faculty
-          </div>
+              <span
+                className="text-[1.7rem] leading-none text-[var(--rams-accent)] mb-1"
+                style={{ fontFamily: 'var(--ff-head)', fontWeight: 700 }}
+              >
+                <CountUp target={stat.target} delay={index * 150} started={started} />
+              </span>
 
-          <button
-            onClick={() => setOpen(true)}
-            className="text-[0.72rem] text-[var(--rams-primary)] uppercase tracking-[0.1em] border border-[var(--rams-primary)] px-4 py-[0.4rem] transition-all hover:bg-[var(--rams-primary)] hover:text-white"
-            style={{ fontFamily: "var(--ff-head)", fontWeight: 700 }}
-          >
-            Request Access
-          </button>
+              <span
+                className="text-[0.6rem] text-[var(--rams-gray-500)] uppercase tracking-[0.14em] text-center"
+                style={{ fontFamily: 'var(--ff-head)', fontWeight: 600 }}
+              >
+                {stat.label}
+              </span>
+            </div>
+          ))}
         </div>
       </div>
-
-      {open && <ContactFormModal onClose={() => setOpen(false)} />}
-    </>
+    </div>
   );
 }

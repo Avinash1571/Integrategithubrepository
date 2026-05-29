@@ -1,283 +1,664 @@
 import { useState } from 'react';
-import { X } from 'lucide-react';
-import ramsvideo from '../../assets/ramsdemo.mp4';
+import { ContactFormModal } from './ContactForm';
 
 export function PlatformOverview() {
-  const [showVideo, setShowVideo] = useState(false);
+  const [openContact, setOpenContact] = useState(false);
 
   return (
     <>
-      <section className="py-12 md:py-20 bg-white">
+      <section
+        className="py-12 md:py-20"
+        style={{
+          background: 'linear-gradient(135deg, #f8f5ff 0%, #fdf6f0 40%, #f0eaff 70%, #fef9f5 100%)',
+        }}
+      >
         <div className="max-w-[1280px] mx-auto px-5 md:px-10">
+          {/* Section label */}
+          <div className="text-center mb-6">
+            <span
+              className="inline-block text-[0.65rem] uppercase tracking-[0.16em] text-[var(--rams-accent)]"
+              style={{ fontFamily: 'var(--ff-head)', fontWeight: 700 }}
+            >
+              BUILT FOR ENGINEERING TEAMS
+            </span>
+          </div>
+
+          <h2
+            className="text-[32px] text-[#1a1a2e] text-center mb-6 leading-[1.2] animate-fade-in-up"
+            style={{ fontFamily: 'var(--ff-head)', fontWeight: 800 }}
+          >
+            OUR PLATFORM IS BUILT SO ENGINEERS<br />
+            CAN FOCUS ON ANALYSIS, NOT ON FIGHTING TOOLS.
+          </h2>
+
+          <p className="text-center text-[#6b5b8a] text-[1.05rem] max-w-[820px] mx-auto mb-12 leading-[1.7] animate-fade-in-up">
+            Role-based permissions, Excel-native workflows, and real engineering support — built for teams who need RAMS tools that actually work the way they do.
+          </p>
+
           <div className="grid grid-cols-1 lg:grid-cols-[0.9fr_1.1fr] gap-8 md:gap-16 items-center">
 
             {/* Left Content */}
             <div>
-              <p className="text-[0.95rem] md:text-[1.05rem] text-[var(--rams-gray-700)] leading-[1.7] mb-6 md:mb-10">
-                Our platform is built so engineers can focus on analysis, not on fighting tools. And you're never alone when it comes to questions or decisions:
-              </p>
-
-              {/* Built for Real Engineering Teams */}
+              {/* Built for real engineering teams */}
               <div className="mb-6 md:mb-8">
                 <h3
-                  className="text-[1.2rem] md:text-[1.5rem] text-[var(--rams-primary)] mb-3 md:mb-4 tracking-[0.02em]"
+                  className="text-[1.1rem] md:text-[1.3rem] text-[#1a1a2e] mb-3 tracking-[0.02em]"
                   style={{ fontFamily: 'var(--ff-head)', fontWeight: 700 }}
                 >
-                  Built for Real Engineering Teams
+                  Built for real engineering teams
                 </h3>
-                <p className="text-[0.9rem] md:text-[0.95rem] text-[var(--rams-gray-600)] leading-[1.7]">
-                  Role-based access control with Super Admin, Company Admin, and Employee roles. Granular read/write permissions at module level. Connected libraries that link data within and across modules automatically.
+                <p className="text-[0.92rem] md:text-[0.98rem] text-[#6b5b8a] leading-[1.7]">
+                  Role-based access control with Super Admin, Company Admin, and Employee roles. Granular read/write permissions at the module level — grant a reviewer read-only FMECA access while your analyst has full write control over PBS and FRP. Connected libraries link data within and across modules automatically.
                 </p>
               </div>
 
-              {/* Excel-Native Workflows */}
+              {/* Excel-native workflows */}
+              <div className="mb-6 md:mb-8">
+                <h3
+                  className="text-[1.1rem] md:text-[1.3rem] text-[#1a1a2e] mb-3 tracking-[0.02em]"
+                  style={{ fontFamily: 'var(--ff-head)', fontWeight: 700 }}
+                >
+                  Excel-native workflows
+                </h3>
+                <p className="text-[0.92rem] md:text-[0.98rem] text-[#6b5b8a] leading-[1.7]">
+                  Import your existing data across all modules. Export structured reports for PBS, Reliability, FMECA, Maintenance, Spares, Safety, and Lifecycle Cost. Works the way your team already works — with the structure they need for audits and customer deliverables.
+                </p>
+              </div>
+
+              {/* You're never alone */}
               <div className="mb-8 md:mb-10">
                 <h3
-                  className="text-[1.2rem] md:text-[1.5rem] text-[var(--rams-primary)] mb-3 md:mb-4 tracking-[0.02em]"
+                  className="text-[1.1rem] md:text-[1.3rem] text-[#1a1a2e] mb-3 tracking-[0.02em]"
                   style={{ fontFamily: 'var(--ff-head)', fontWeight: 700 }}
                 >
-                  Excel-Native Workflows
+                  You're never alone
                 </h3>
-                <p className="text-[0.9rem] md:text-[0.95rem] text-[var(--rams-gray-600)] leading-[1.7]">
-                  Import your existing spreadsheet data. Export structured reports for PBS, Reliability, FMECA, Maintenance, Spares, and Safety. Works the way your team already works.
+                <p className="text-[0.92rem] md:text-[0.98rem] text-[#6b5b8a] leading-[1.7]">
+                  Direct access to the engineering team that built the platform. Bug reports get read and acted on, not ticketed into a 6-month backlog. Beta users have a real voice in what gets built next — this is a partnership, not a licence agreement.
                 </p>
               </div>
 
-              {/* Video Button */}
+              {/* Request a Demo CTA */}
               <button
-                onClick={() => setShowVideo(true)}
-                className="flex items-center gap-3 md:gap-4 bg-white rounded-xl md:rounded-2xl p-4 md:p-6 md:pr-8 transition-all duration-300 shadow-[0_2px_12px_rgba(0,0,0,0.08)] hover:shadow-[0_8px_32px_rgba(0,0,0,0.15)] hover:-translate-y-1 w-full max-w-[520px]"
+                onClick={() => setOpenContact(true)}
+                className="inline-flex items-center gap-3 px-7 py-4 bg-[var(--rams-accent)] text-white rounded-lg transition-all duration-300 hover:bg-[#d4621f] hover:shadow-[0_8px_24px_rgba(232,114,42,0.35)] hover:-translate-y-[2px] active:translate-y-0"
+                style={{ fontFamily: 'var(--ff-head)', fontWeight: 700 }}
               >
-                <div className="w-12 h-12 md:w-16 md:h-16 rounded-full bg-white border-2 border-[var(--rams-accent)] flex items-center justify-center flex-shrink-0">
-                  <svg
-                    className="w-5 h-5 md:w-7 md:h-7 ml-1"
-                    fill="var(--rams-accent)"
-                    viewBox="0 0 24 24"
-                  >
-                    <path d="M8 5v14l11-7z" />
-                  </svg>
-                </div>
-                <div className="text-left flex-1">
-                  <div
-                    className="text-[0.95rem] md:text-[1.05rem] text-[var(--rams-primary)] mb-1"
-                    style={{ fontFamily: 'var(--ff-head)', fontWeight: 700 }}
-                  >
-                    See RAMS360 in action
-                  </div>
-                  <div className="text-[0.8rem] md:text-[0.875rem] text-[var(--rams-gray-500)]">
-                    3 min product walkthrough
-                  </div>
-                </div>
-                <span className="hidden sm:inline-block px-4 py-2 bg-[#fff5f0] text-[var(--rams-accent)] text-[0.7rem] uppercase tracking-[0.08em] rounded-md" style={{ fontFamily: 'var(--ff-head)', fontWeight: 700 }}>
-                  VIDEO
-                </span>
+                <span className="text-[0.85rem] uppercase tracking-[0.1em]">REQUEST A DEMO</span>
+                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
               </button>
             </div>
 
             {/* Right Illustration */}
-            <div className="flex items-center justify-center lg:justify-end mt-8 lg:mt-0">
-              <svg viewBox="0 0 1000 600" className="w-full max-w-[400px] md:max-w-[600px] lg:max-w-[980px]" fill="none">
-                {/* Divider Line */}
-                <line x1="500" y1="80" x2="500" y2="520" stroke="#e5e7eb" strokeWidth="2" />
+<div className="flex items-center justify-center lg:justify-end mt-8 lg:mt-0 overflow-visible">
 
-                {/* LEFT SIDE - BEFORE (Manual Process) */}
-                <g>
-                  {/* Scattered Excel Files */}
-                  <g transform="translate(180, 120)">
-                    <rect x="0" y="0" width="100" height="80" rx="6" fill="#f1f5f9" stroke="#cbd5e1" strokeWidth="2" />
-                    <rect x="8" y="8" width="84" height="20" rx="3" fill="#10b981" opacity="0.8" />
-                    <text x="50" y="23" textAnchor="middle" fill="white" fontSize="11" fontWeight="700">Excel</text>
-                    <line x1="15" y1="40" x2="85" y2="40" stroke="#cbd5e1" strokeWidth="1.5" />
-                    <line x1="15" y1="50" x2="70" y2="50" stroke="#cbd5e1" strokeWidth="1.5" />
-                    <line x1="15" y1="60" x2="80" y2="60" stroke="#cbd5e1" strokeWidth="1.5" />
-                  </g>
+  <svg
+    viewBox="0 0 1600 1300"
+    className="w-full max-w-[1400px] md:max-w-[1800px] lg:max-w-[2400px] xl:max-w-[2800px] h-auto"
+    fill="none"
+    preserveAspectRatio="xMidYMid meet"
+  >
+    <g transform="scale(1.15) translate(60, 40)">
 
-                  <g transform="translate(90, 250)">
-                    <rect x="0" y="0" width="100" height="80" rx="6" fill="#f1f5f9" stroke="#cbd5e1" strokeWidth="2" />
-                    <rect x="8" y="8" width="84" height="20" rx="3" fill="#10b981" opacity="0.8" />
-                    <text x="50" y="23" textAnchor="middle" fill="white" fontSize="11" fontWeight="700">Excel</text>
-                    <line x1="15" y1="40" x2="85" y2="40" stroke="#cbd5e1" strokeWidth="1.5" />
-                    <line x1="15" y1="50" x2="65" y2="50" stroke="#cbd5e1" strokeWidth="1.5" />
-                    <line x1="15" y1="60" x2="75" y2="60" stroke="#cbd5e1" strokeWidth="1.5" />
-                  </g>
+      <defs>
+        <circle
+          id="ripple1"
+          cx="250"
+          cy="360"
+          r="90"
+          fill="none"
+          stroke="#E8722A"
+          strokeWidth="3"
+          opacity="0.28"
+        >
+          <animate attributeName="r" from="90" to="190" dur="2.4s" repeatCount="indefinite" />
+          <animate attributeName="opacity" from="0.28" to="0" dur="2.4s" repeatCount="indefinite" />
+        </circle>
 
-                  <g transform="translate(280, 280)">
-                    <rect x="0" y="0" width="100" height="80" rx="6" fill="#f1f5f9" stroke="#cbd5e1" strokeWidth="2" />
-                    <rect x="8" y="8" width="84" height="20" rx="3" fill="#10b981" opacity="0.8" />
-                    <text x="50" y="23" textAnchor="middle" fill="white" fontSize="11" fontWeight="700">Excel</text>
-                    <line x1="15" y1="40" x2="85" y2="40" stroke="#cbd5e1" strokeWidth="1.5" />
-                    <line x1="15" y1="50" x2="60" y2="50" stroke="#cbd5e1" strokeWidth="1.5" />
-                    <line x1="15" y1="60" x2="70" y2="60" stroke="#cbd5e1" strokeWidth="1.5" />
-                  </g>
+        <circle
+          id="ripple2"
+          cx="250"
+          cy="360"
+          r="90"
+          fill="none"
+          stroke="#E8722A"
+          strokeWidth="3"
+          opacity="0.28"
+        >
+          <animate attributeName="r" from="90" to="190" dur="2.4s" begin="1.2s" repeatCount="indefinite" />
+          <animate attributeName="opacity" from="0.28" to="0" dur="2.4s" begin="1.2s" repeatCount="indefinite" />
+        </circle>
+      </defs>
 
-                  {/* Disconnected Icons */}
-                  <g transform="translate(320, 150)">
-                    <circle cx="0" cy="0" r="18" fill="#ef4444" opacity="0.2" />
-                    <line x1="-6" y1="-6" x2="6" y2="6" stroke="#ef4444" strokeWidth="2" strokeLinecap="round" />
-                    <line x1="6" y1="-6" x2="-6" y2="6" stroke="#ef4444" strokeWidth="2" strokeLinecap="round" />
-                  </g>
+      <use href="#ripple1" />
+      <use href="#ripple2" />
 
-                  <g transform="translate(120, 400)">
-                    <circle cx="0" cy="0" r="18" fill="#f59e0b" opacity="0.2" />
-                    <path d="M 0 -8 L 7 4 L -7 4 Z" fill="#f59e0b" />
-                    <circle cx="0" cy="0" r="1.5" fill="white" />
-                    <rect x="-1" y="-5" width="2" height="4" rx="1" fill="white" />
-                  </g>
+      {/* ================= CENTRAL HUB ================= */}
+      <g transform="translate(500, 170)">
 
-                  {/* Label */}
-                  <text x="240" y="480" textAnchor="middle" fill="#64748b" fontSize="18" fontWeight="600">Manual Process</text>
-                  <text x="240" y="505" textAnchor="middle" fill="#94a3b8" fontSize="13" fontWeight="500">Disconnected spreadsheets</text>
-                </g>
+        {/* TOP LABEL */}
+        <g transform="translate(40, -60)">
+          <rect
+            x="0"
+            y="0"
+            width="340"
+            height="56"
+            rx="10"
+            fill="#E8722A"
+          />
+          <text
+            x="170"
+            y="35"
+            textAnchor="middle"
+            fill="white"
+            fontSize="22"
+            fontWeight="700"
+          >
+            Change propagates instantly
+          </text>
+        </g>
 
-                {/* RIGHT SIDE - AFTER (Automated SaaS Platform) */}
-                <g>
-                  {/* Cloud Platform Base */}
-                  <g transform="translate(760, 140)">
-                    <ellipse cx="0" cy="0" rx="140" ry="35" fill="#e0f2fe" opacity="0.6" />
-                    <ellipse cx="0" cy="0" rx="120" ry="28" fill="#bae6fd" opacity="0.4" />
-                    <path d="M -80 -15 Q -100 -30 -90 -45 Q -70 -55 -50 -45 Q -40 -60 -20 -55 Q 0 -65 20 -55 Q 40 -60 50 -45 Q 70 -55 90 -45 Q 100 -30 80 -15"
-                          fill="#0ea5e9" opacity="0.2" stroke="#0ea5e9" strokeWidth="2" />
-                    <text x="0" y="-28" textAnchor="middle" fill="#0369a1" fontSize="14" fontWeight="700">RAMS360 SaaS</text>
-                  </g>
+        {/* MAIN PANEL */}
+        <rect
+          x="0"
+          y="0"
+          width="420"
+          height="470"
+          rx="20"
+          fill="#1a1a2e"
+          stroke="#432975"
+          strokeWidth="3"
+        />
 
-                  {/* Automated Workflow Pipeline */}
-                  <g transform="translate(580, 200)">
-                    {/* Input */}
-                    <rect x="0" y="0" width="70" height="50" rx="6" fill="#f1f5f9" stroke="#cbd5e1" strokeWidth="2" />
-                    <text x="35" y="30" textAnchor="middle" fill="#64748b" fontSize="11" fontWeight="600">Data In</text>
+        {/* URL BAR */}
+        <rect
+          x="22"
+          y="22"
+          width="376"
+          height="42"
+          rx="8"
+          fill="#2a2a3e"
+        />
 
-                    {/* Arrow 1 */}
-                    <path d="M 70 25 L 100 25" stroke="#22c55e" strokeWidth="2" markerEnd="url(#arrowgreen)" />
+        <text
+          x="40"
+          y="48"
+          fill="#9ca3af"
+          fontSize="17"
+          fontWeight="500"
+        >
+          https://app.rams360.io/project/...
+        </text>
 
-                    {/* Automation Gear 1 */}
-                    <g transform="translate(120, 25)">
-                      <circle cx="0" cy="0" r="20" fill="#6366f1" opacity="0.15" stroke="#6366f1" strokeWidth="2" />
-                      <circle cx="0" cy="0" r="8" fill="#6366f1" opacity="0.3" />
-                      <path d="M 0 -12 L 3 -16 L -3 -16 Z M 12 0 L 16 3 L 16 -3 Z M 0 12 L 3 16 L -3 16 Z M -12 0 L -16 3 L -16 -3 Z"
-                            fill="#6366f1" />
-                    </g>
+        {/* MODULES */}
+        <g transform="translate(28, 105)">
+          <text
+            x="0"
+            y="0"
+            fill="#f3f4f6"
+            fontSize="22"
+            fontWeight="700"
+          >
+            Modules
+          </text>
 
-                    {/* Arrow 2 */}
-                    <path d="M 140 25 L 170 25" stroke="#22c55e" strokeWidth="2" />
+          {[
+            ['PBS', 0, 18],
+            ['FRP', 118, 18],
+            ['FMECA', 236, 18],
+            ['MTTR', 0, 78],
+            ['PM', 118, 78],
+            ['Spares', 236, 78],
+          ].map(([label, x, y]) => (
+            <g key={label}>
+              <rect
+                x={x}
+                y={y}
+                width="102"
+                height="44"
+                rx="9"
+                fill="#432975"
+                opacity="0.35"
+                stroke="#6b3fa0"
+                strokeWidth="2"
+              />
 
-                    {/* Processing */}
-                    <rect x="170" y="0" width="80" height="50" rx="6" fill="#6366f1" opacity="0.1" stroke="#6366f1" strokeWidth="2" />
-                    <text x="210" y="22" textAnchor="middle" fill="#6366f1" fontSize="10" fontWeight="700">Auto</text>
-                    <text x="210" y="36" textAnchor="middle" fill="#6366f1" fontSize="10" fontWeight="700">Analysis</text>
+              <text
+                x={Number(x) + 51}
+                y={Number(y) + 28}
+                textAnchor="middle"
+                fill="#f3f4f6"
+                fontSize="18"
+                fontWeight="700"
+              >
+                {label}
+              </text>
+            </g>
+          ))}
+        </g>
 
-                    {/* Arrow 3 */}
-                    <path d="M 250 25 L 280 25" stroke="#22c55e" strokeWidth="2" />
+        {/* TEAM ACCESS */}
+        <g transform="translate(28, 255)">
 
-                    {/* Automation Gear 2 */}
-                    <g transform="translate(300, 25)">
-                      <circle cx="0" cy="0" r="20" fill="#6366f1" opacity="0.15" stroke="#6366f1" strokeWidth="2" />
-                      <circle cx="0" cy="0" r="8" fill="#6366f1" opacity="0.3" />
-                      <path d="M 0 -12 L 3 -16 L -3 -16 Z M 12 0 L 16 3 L 16 -3 Z M 0 12 L 3 16 L -3 16 Z M -12 0 L -16 3 L -16 -3 Z"
-                            fill="#6366f1" />
-                    </g>
+          <text
+            x="0"
+            y="0"
+            fill="#f3f4f6"
+            fontSize="22"
+            fontWeight="700"
+          >
+            Team Access
+          </text>
 
-                    {/* Arrow 4 */}
-                    <path d="M 320 25 L 350 25" stroke="#22c55e" strokeWidth="2" />
+          {[
+            ['JK', 'Full Access', '#E8722A', 18],
+            ['RS', 'Read FMECA', '#2a9d7f', 78],
+            ['AM', 'Safety + FTA', '#8b5cf6', 138],
+          ].map(([name, role, color, y]) => (
+            <g key={name}>
+              <rect
+                x="0"
+                y={y}
+                width="360"
+                height="46"
+                rx="9"
+                fill="#2a2a3e"
+              />
 
-                    {/* Output */}
-                    <rect x="350" y="0" width="70" height="50" rx="6" fill="#22c55e" opacity="0.15" stroke="#22c55e" strokeWidth="2" />
-                    <text x="385" y="30" textAnchor="middle" fill="#22c55e" fontSize="11" fontWeight="700">Reports</text>
-                  </g>
+              <circle
+                cx="18"
+                cy={Number(y) + 23}
+                r="8"
+                fill={color}
+              />
 
-                  {/* Arrow marker definition */}
-                  <defs>
-                    <marker id="arrowgreen" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
-                      <path d="M0,0 L0,6 L9,3 z" fill="#22c55e" />
-                    </marker>
-                  </defs>
+              <text
+                x="40"
+                y={Number(y) + 29}
+                fill="#f3f4f6"
+                fontSize="18"
+                fontWeight="700"
+              >
+                {name}
+              </text>
 
-                  {/* Happy Engineer After RAMS360 */}
-                  <g transform="translate(770, 330)">
-                    {/* Head */}
-                    <circle cx="0" cy="0" r="40" fill="#1e293b" />
+              <text
+                x="105"
+                y={Number(y) + 29}
+                fill="#9ca3af"
+                fontSize="17"
+              >
+                {role}
+              </text>
+            </g>
+          ))}
+        </g>
+      </g>
 
-                    {/* Happy face */}
-                    <ellipse cx="-14" cy="-8" rx="5" ry="6" fill="#334155" />
-                    <ellipse cx="14" cy="-8" rx="5" ry="6" fill="#334155" />
+      {/* ================= LEFT CARD ================= */}
+      <g transform="translate(120, 280)">
 
-                    {/* Big smile */}
-                    <path d="M -18 6 Q 0 22 18 6" stroke="#22c55e" strokeWidth="3" fill="none" strokeLinecap="round" />
+        <rect
+          x="0"
+          y="0"
+          width="240"
+          height="300"
+          rx="18"
+          fill="white"
+          stroke="#E8722A"
+          strokeWidth="3"
+        />
 
-                    {/* Body */}
-                    <rect x="-35" y="40" width="70" height="80" rx="10" fill="#0ea5e9" opacity="0.9" />
+        <circle
+          cx="120"
+          cy="62"
+          r="38"
+          fill="#E8722A"
+          opacity="0.15"
+        />
 
-                    {/* Arms - relaxed and happy */}
-                    <rect x="-60" y="50" width="22" height="50" rx="10" fill="#0ea5e9" opacity="0.9" />
-                    <rect x="38" y="50" width="22" height="50" rx="10" fill="#0ea5e9" opacity="0.9" />
+        <text
+          x="120"
+          y="70"
+          textAnchor="middle"
+          fill="#E8722A"
+          fontSize="24"
+          fontWeight="700"
+        >
+          JK
+        </text>
 
-                    {/* Thumbs up */}
-                    <circle cx="50" cy="70" r="10" fill="#fbbf24" />
-                    <rect x="46" y="62" width="8" height="15" rx="4" fill="#fbbf24" />
+        <text
+          x="120"
+          y="118"
+          textAnchor="middle"
+          fill="#1a1a2e"
+          fontSize="21"
+          fontWeight="700"
+        >
+          Reliability Lead
+        </text>
 
-                    {/* Success checkmark */}
-                    <g transform="translate(-70, -10)">
-                      <circle cx="0" cy="0" r="18" fill="#22c55e" opacity="0.2" />
-                      <path d="M -6 0 L -2 5 L 7 -6" stroke="#22c55e" strokeWidth="2.5" fill="none" strokeLinecap="round" strokeLinejoin="round" />
-                    </g>
+        <text
+          x="120"
+          y="148"
+          textAnchor="middle"
+          fill="#6b5b8a"
+          fontSize="18"
+        >
+          Full Access
+        </text>
 
-                    {/* Sparkles/stars indicating happiness */}
-                    <g transform="translate(60, -20)">
-                      <path d="M 0 -8 L 2 0 L 0 8 L -2 0 Z" fill="#fbbf24" />
-                      <path d="M -8 0 L 0 2 L 8 0 L 0 -2 Z" fill="#fbbf24" />
-                    </g>
+        <rect
+          x="28"
+          y="242"
+          width="184"
+          height="36"
+          rx="8"
+          fill="#E8722A"
+          opacity="0.1"
+        />
 
-                    <g transform="translate(-65, 30)">
-                      <path d="M 0 -6 L 1.5 0 L 0 6 L -1.5 0 Z" fill="#fbbf24" opacity="0.8" />
-                      <path d="M -6 0 L 0 1.5 L 6 0 L 0 -1.5 Z" fill="#fbbf24" opacity="0.8" />
-                    </g>
-                  </g>
+        <text
+          x="120"
+          y="265"
+          textAnchor="middle"
+          fill="#E8722A"
+          fontSize="17"
+          fontWeight="700"
+        >
+          Owns project data
+        </text>
+      </g>
 
-                  {/* Label */}
-                  <text x="760" y="480" textAnchor="middle" fill="#64748b" fontSize="18" fontWeight="600">Automated SaaS Platform</text>
-                  <text x="760" y="505" textAnchor="middle" fill="#94a3b8" fontSize="13" fontWeight="500">Reduces manual effort by 90%</text>
-                </g>
+      {/* ================= BOTTOM CARD ================= */}
+      <g transform="translate(570, 700)">
 
-                {/* Center Arrow */}
-                <g transform="translate(500, 300)">
-                  <circle cx="0" cy="0" r="32" fill="white" stroke="#e2e8f0" strokeWidth="2" />
-                  <path d="M -10 0 L 10 0 M 4 -6 L 10 0 L 4 6" stroke="#6366f1" strokeWidth="2.5" fill="none" strokeLinecap="round" strokeLinejoin="round" />
-                </g>
-              </svg>
-            </div>
+        <rect
+          x="0"
+          y="0"
+          width="240"
+          height="300"
+          rx="18"
+          fill="white"
+          stroke="#2a9d7f"
+          strokeWidth="3"
+        />
+
+        <circle
+          cx="120"
+          cy="62"
+          r="38"
+          fill="#2a9d7f"
+          opacity="0.15"
+        />
+
+        <text
+          x="120"
+          y="70"
+          textAnchor="middle"
+          fill="#2a9d7f"
+          fontSize="24"
+          fontWeight="700"
+        >
+          RS
+        </text>
+
+        <text
+          x="120"
+          y="118"
+          textAnchor="middle"
+          fill="#1a1a2e"
+          fontSize="21"
+          fontWeight="700"
+        >
+          Customer Review
+        </text>
+
+        <text
+          x="120"
+          y="148"
+          textAnchor="middle"
+          fill="#6b5b8a"
+          fontSize="18"
+        >
+          Read-only FMECA
+        </text>
+
+        <rect
+          x="28"
+          y="242"
+          width="184"
+          height="36"
+          rx="8"
+          fill="#2a9d7f"
+          opacity="0.1"
+        />
+
+        <text
+          x="120"
+          y="265"
+          textAnchor="middle"
+          fill="#2a9d7f"
+          fontSize="17"
+          fontWeight="700"
+        >
+          Views safety analysis
+        </text>
+      </g>
+
+      {/* ================= RIGHT CARD ================= */}
+      <g transform="translate(1080, 280)">
+
+        <rect
+          x="0"
+          y="0"
+          width="240"
+          height="300"
+          rx="18"
+          fill="white"
+          stroke="#8b5cf6"
+          strokeWidth="3"
+        />
+
+        <circle
+          cx="120"
+          cy="62"
+          r="38"
+          fill="#8b5cf6"
+          opacity="0.15"
+        />
+
+        <text
+          x="120"
+          y="70"
+          textAnchor="middle"
+          fill="#8b5cf6"
+          fontSize="24"
+          fontWeight="700"
+        >
+          AM
+        </text>
+
+        <text
+          x="120"
+          y="118"
+          textAnchor="middle"
+          fill="#1a1a2e"
+          fontSize="21"
+          fontWeight="700"
+        >
+          Safety Specialist
+        </text>
+
+        <text
+          x="120"
+          y="148"
+          textAnchor="middle"
+          fill="#6b5b8a"
+          fontSize="18"
+        >
+          Safety + FTA only
+        </text>
+
+        <rect
+          x="28"
+          y="242"
+          width="184"
+          height="36"
+          rx="8"
+          fill="#8b5cf6"
+          opacity="0.1"
+        />
+
+        <text
+          x="120"
+          y="265"
+          textAnchor="middle"
+          fill="#8b5cf6"
+          fontSize="17"
+          fontWeight="700"
+        >
+          Focused domain access
+        </text>
+      </g>
+
+      {/* ================= CONNECTION LINES ================= */}
+
+      {/* Left */}
+      <path
+        d="M 360 430 Q 470 360 500 360"
+        stroke="#E8722A"
+        strokeWidth="4"
+        strokeDasharray="10 8"
+        fill="none"
+        opacity="0.75"
+      >
+        <animate
+          attributeName="stroke-dashoffset"
+          from="0"
+          to="24"
+          dur="1s"
+          repeatCount="indefinite"
+        />
+      </path>
+
+      {/* Bottom */}
+      <path
+        d="M 720 640 Q 720 690 690 700"
+        stroke="#E8722A"
+        strokeWidth="4"
+        strokeDasharray="10 8"
+        fill="none"
+        opacity="0.75"
+      >
+        <animate
+          attributeName="stroke-dashoffset"
+          from="0"
+          to="24"
+          dur="1s"
+          repeatCount="indefinite"
+        />
+      </path>
+
+      {/* Right */}
+      <path
+        d="M 920 360 Q 1040 360 1080 430"
+        stroke="#E8722A"
+        strokeWidth="4"
+        strokeDasharray="10 8"
+        fill="none"
+        opacity="0.75"
+      >
+        <animate
+          attributeName="stroke-dashoffset"
+          from="0"
+          to="24"
+          dur="1s"
+          repeatCount="indefinite"
+        />
+      </path>
+
+      {/* ================= BOTTOM STATUS BAR ================= */}
+      <g transform="translate(350, 980)">
+
+        <rect
+          x="0"
+          y="30"
+          width="860"
+          height="52"
+          rx="12"
+          fill="#1a1a2e"
+          opacity="0.96"
+        />
+
+        <circle
+          cx="24"
+          cy="56"
+          r="7"
+          fill="#10b981"
+        />
+
+        <text
+          x="42"
+          y="63"
+          fill="#f3f4f6"
+          fontSize="18"
+          fontWeight="700"
+        >
+          Live Sync
+        </text>
+
+        <text
+          x="210"
+          y="63"
+          fill="#f3f4f6"
+          fontSize="18"
+        >
+          No Install
+        </text>
+
+        <text
+          x="430"
+          y="63"
+          fill="#10b981"
+          fontSize="18"
+          fontWeight="700"
+        >
+          α = 1.000 ✓
+        </text>
+
+        <text
+          x="620"
+          y="63"
+          fill="#f3f4f6"
+          fontSize="18"
+        >
+          3 active users
+        </text>
+
+        <text
+          x="770"
+          y="63"
+          fill="#10b981"
+          fontSize="18"
+          fontWeight="700"
+        >
+          0 conflicts
+        </text>
+      </g>
+
+    </g>
+  </svg>
+</div>
 
           </div>
         </div>
       </section>
 
-      {/* Video Popup Modal */}
-      {showVideo && (
-        <div
-          className="fixed inset-0 z-[10000] bg-black/80 backdrop-blur-sm flex items-center justify-center p-4"
-          onClick={() => setShowVideo(false)}
-        >
-          <div
-            className="relative w-full max-w-[1000px] aspect-video bg-black rounded-lg overflow-hidden shadow-2xl"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <button
-              onClick={() => setShowVideo(false)}
-              className="absolute top-4 right-4 z-10 w-10 h-10 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center text-white hover:bg-white/20 transition-all"
-              aria-label="Close video"
-            >
-              <X className="w-6 h-6" />
-            </button>
-            <video
-              className="w-full h-full"
-              src={ramsvideo}
-              controls
-              autoPlay
-              playsInline
-            >
-              Your browser does not support the video tag.
-            </video>
-          </div>
-        </div>
-      )}
+      <ContactFormModal open={openContact} onOpenChange={setOpenContact} />
     </>
   );
 }
