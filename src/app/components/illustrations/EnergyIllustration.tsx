@@ -1,10 +1,6 @@
 export function EnergyIllustration() {
   return (
-    <svg
-      viewBox="0 0 800 620"
-      className="w-full h-full"
-      preserveAspectRatio="xMidYMid meet"
-    >
+    <svg viewBox="0 0 800 600" className="w-full h-full">
       <defs>
         <linearGradient id="energyGrad" x1="0%" y1="0%" x2="100%" y2="100%">
           <stop offset="0%" stopColor="#8b5cf6" stopOpacity="0.1" />
@@ -21,10 +17,10 @@ export function EnergyIllustration() {
       </defs>
 
       {/* Background */}
-      <rect width="800" height="620" fill="url(#energyGrad)" />
+      <rect width="800" height="600" fill="url(#energyGrad)" />
 
-      {/* Main Illustration shifted upward */}
-      <g transform="translate(0,-40)">
+      {/* Main Illustration shifted to center */}
+      <g transform="translate(60, 25) scale(0.85)">
         {/* Wind Turbine */}
         <g transform="translate(80, 70)">
           <rect

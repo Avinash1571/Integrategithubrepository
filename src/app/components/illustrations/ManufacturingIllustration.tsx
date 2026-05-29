@@ -1,10 +1,6 @@
 export function ManufacturingIllustration() {
   return (
-    <svg
-      viewBox="0 0 1000 620"
-      className="w-full h-full"
-      preserveAspectRatio="xMidYMid meet"
-    >
+    <svg viewBox="0 0 1000 750" className="w-full h-full">
       <defs>
         <linearGradient id="mfgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
           <stop offset="0%" stopColor="#4682B4" stopOpacity="0.08" />
@@ -21,10 +17,10 @@ export function ManufacturingIllustration() {
       </defs>
 
       {/* Background */}
-      <rect width="1000" height="620" fill="url(#mfgGrad)" />
+      <rect width="1000" height="750" fill="url(#mfgGrad)" />
 
       {/* Main Wrapper */}
-      <g transform="translate(40,25)">
+      <g transform="translate(50,115) scale(0.95)">
 
         {/* ===================================================== */}
         {/* Production Line */}

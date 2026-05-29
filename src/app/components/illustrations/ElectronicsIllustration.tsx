@@ -1,12 +1,6 @@
 export function ElectronicsIllustration() {
   return (
-    <div className="w-full overflow-hidden bg-[#F1FBFC] leading-none">
-      <svg
-        viewBox="0 0 1000 1000"
-        className="block w-full h-auto"
-        xmlns="http://www.w3.org/2000/svg"
-        preserveAspectRatio="xMidYMid slice"
-      >
+    <svg viewBox="0 0 1000 750" className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
         <defs>
           <linearGradient id="elecGrad" x1="0%" y1="0%" x2="100%" y2="100%">
             <stop offset="0%" stopColor="#06b6d4" stopOpacity="0.06" />
@@ -23,8 +17,8 @@ export function ElectronicsIllustration() {
         </defs>
 
         {/* Full Background */}
-        <rect width="1000" height="500" fill="url(#elecGrad)" />
-
+        <rect width="1000" height="750" fill="url(#elecGrad)" />
+        <g transform="translate(0,140)">
         {/* ================================================= */}
         {/* LEFT PCB */}
         {/* ================================================= */}
@@ -507,7 +501,7 @@ export function ElectronicsIllustration() {
           strokeDasharray="8 8"
           opacity="0.35"
         />
+        </g>
       </svg>
-    </div>
   );
 }

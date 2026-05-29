@@ -1,4 +1,5 @@
-import logo from '../../imports/Rams_360_Logo_Invert600.png';
+import { Link } from 'react-router';
+import logoImage from '../../assets/mainlogo.png';
 
 export function Footer() {
   return (
@@ -12,12 +13,9 @@ export function Footer() {
 
           {/* Left Section - Logo & Description */}
           <div className="lg:col-span-1">
-            <div className="mb-4">
-              <h2 className="text-2xl font-bold">
-                <span className="text-white">RAMS</span>
-                <span className="text-[var(--rams-accent)]">360</span>
-              </h2>
-            </div>
+            <a href="#" className="inline-flex items-center mb-6">
+              <img src={logoImage} alt="RAMS360 Logo" className="h-[42px] w-auto" />
+            </a>
             <p className="text-sm leading-relaxed mb-6 text-white/50">
               The first cloud-native Reliability, Availability, Maintainability and Safety engineering platform — with full Lifecycle Cost Analysis. MIL-standard rigour. Browser-native delivery.
             </p>
@@ -33,14 +31,16 @@ export function Footer() {
           <div>
             <h3 className="text-xs uppercase tracking-wider text-white/40 mb-4 font-semibold">PLATFORM</h3>
             <ul className="space-y-2.5">
-              <li><a href="#modules" className="text-sm hover:text-white transition-colors">Product Breakdown Structure</a></li>
-              <li><a href="#modules" className="text-sm hover:text-white transition-colors">Failure Rate Prediction</a></li>
-              <li><a href="#modules" className="text-sm hover:text-white transition-colors">FMECA Module</a></li>
-              <li><a href="#modules" className="text-sm hover:text-white transition-colors">MTTR Analysis</a></li>
-              <li><a href="#modules" className="text-sm hover:text-white transition-colors">Preventive Maintenance</a></li>
-              <li><a href="#modules" className="text-sm hover:text-white transition-colors">Safety Analysis</a></li>
-              <li><a href="#modules" className="text-sm hover:text-white transition-colors">Lifecycle Cost Analysis</a></li>
-              <li><a href="#modules" className="text-sm hover:text-white transition-colors">Reports</a></li>
+              <li><Link to="/modules/pbs" className="text-sm hover:text-white transition-colors">Product Breakdown Structure</Link></li>
+              <li><Link to="/modules/frp" className="text-sm hover:text-white transition-colors">Failure Rate Prediction</Link></li>
+              <li><Link to="/modules/fmeca" className="text-sm hover:text-white transition-colors">FMECA Module</Link></li>
+              <li><Link to="/modules/mttr" className="text-sm hover:text-white transition-colors">MTTR Analysis</Link></li>
+              <li><Link to="/modules/pm" className="text-sm hover:text-white transition-colors">Preventive Maintenance</Link></li>
+              <li><Link to="/modules/spares" className="text-sm hover:text-white transition-colors">Spare Parts Analysis</Link></li>
+              <li><Link to="/modules/safety" className="text-sm hover:text-white transition-colors">Safety Analysis</Link></li>
+              <li><Link to="/modules/fta" className="text-sm hover:text-white transition-colors">Fault Tree Analysis</Link></li>
+              <li><Link to="/modules/rbd" className="text-sm hover:text-white transition-colors">Reliability Block Diagram</Link></li>
+              <li><Link to="/modules/reports" className="text-sm hover:text-white transition-colors">Reports</Link></li>
             </ul>
           </div>
 
